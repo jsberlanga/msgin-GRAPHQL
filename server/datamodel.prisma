@@ -1,0 +1,10 @@
+type Message {
+  id: ID! @id
+  title: String!
+  author: User @relation(name: "MessagesByUser", onDelete: CASCADE)
+}
+type User {
+  id: ID! @id
+  name: String!
+  messages: [Message]! @relation(name: "MessagesByUser")
+}
