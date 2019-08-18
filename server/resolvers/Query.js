@@ -8,6 +8,9 @@ export default {
     },
     getMessages: async (parent, args, context) => {
       return await context.prisma.messages();
+    },
+    getComments: async (parent, args, context) => {
+      return await context.prisma.comments();
     }
   }
 };

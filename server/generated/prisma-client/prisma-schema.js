@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateMessage {
+/* GraphQL */ `type AggregateComment {
+  count: Int!
+}
+
+type AggregateMessage {
   count: Int!
 }
 
@@ -15,12 +19,239 @@ type BatchPayload {
   count: Long!
 }
 
+type Comment {
+  id: ID!
+  text: String!
+  message: Message!
+  postedBy: User!
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  id: ID
+  text: String!
+  message: MessageCreateOneWithoutCommentsInput!
+  postedBy: UserCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateManyWithoutMessageInput {
+  create: [CommentCreateWithoutMessageInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateManyWithoutPostedByInput {
+  create: [CommentCreateWithoutPostedByInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutMessageInput {
+  id: ID
+  text: String!
+  postedBy: UserCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateWithoutPostedByInput {
+  id: ID
+  text: String!
+  message: MessageCreateOneWithoutCommentsInput!
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  text: String!
+}
+
+input CommentScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  AND: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+  AND: [CommentSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
+  NOT: [CommentSubscriptionWhereInput!]
+}
+
+input CommentUpdateInput {
+  text: String
+  message: MessageUpdateOneRequiredWithoutCommentsInput
+  postedBy: UserUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateManyDataInput {
+  text: String
+}
+
+input CommentUpdateManyMutationInput {
+  text: String
+}
+
+input CommentUpdateManyWithoutMessageInput {
+  create: [CommentCreateWithoutMessageInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutMessageInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutMessageInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithoutPostedByInput {
+  create: [CommentCreateWithoutPostedByInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyDataInput!
+}
+
+input CommentUpdateWithoutMessageDataInput {
+  text: String
+  postedBy: UserUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateWithoutPostedByDataInput {
+  text: String
+  message: MessageUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutMessageInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutMessageDataInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutPostedByInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutPostedByDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutMessageInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutMessageDataInput!
+  create: CommentCreateWithoutMessageInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutPostedByInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutPostedByDataInput!
+  create: CommentCreateWithoutPostedByInput!
+}
+
+input CommentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  message: MessageWhereInput
+  postedBy: UserWhereInput
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
 
 type Message {
   id: ID!
   title: String!
   author: User
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
 
 type MessageConnection {
@@ -33,6 +264,7 @@ input MessageCreateInput {
   id: ID
   title: String!
   author: UserCreateOneWithoutMessagesInput
+  comments: CommentCreateManyWithoutMessageInput
 }
 
 input MessageCreateManyWithoutAuthorInput {
@@ -40,9 +272,21 @@ input MessageCreateManyWithoutAuthorInput {
   connect: [MessageWhereUniqueInput!]
 }
 
+input MessageCreateOneWithoutCommentsInput {
+  create: MessageCreateWithoutCommentsInput
+  connect: MessageWhereUniqueInput
+}
+
 input MessageCreateWithoutAuthorInput {
   id: ID
   title: String!
+  comments: CommentCreateManyWithoutMessageInput
+}
+
+input MessageCreateWithoutCommentsInput {
+  id: ID
+  title: String!
+  author: UserCreateOneWithoutMessagesInput
 }
 
 type MessageEdge {
@@ -117,6 +361,7 @@ input MessageSubscriptionWhereInput {
 input MessageUpdateInput {
   title: String
   author: UserUpdateOneWithoutMessagesInput
+  comments: CommentUpdateManyWithoutMessageInput
 }
 
 input MessageUpdateManyDataInput {
@@ -144,13 +389,31 @@ input MessageUpdateManyWithWhereNestedInput {
   data: MessageUpdateManyDataInput!
 }
 
+input MessageUpdateOneRequiredWithoutCommentsInput {
+  create: MessageCreateWithoutCommentsInput
+  update: MessageUpdateWithoutCommentsDataInput
+  upsert: MessageUpsertWithoutCommentsInput
+  connect: MessageWhereUniqueInput
+}
+
 input MessageUpdateWithoutAuthorDataInput {
   title: String
+  comments: CommentUpdateManyWithoutMessageInput
+}
+
+input MessageUpdateWithoutCommentsDataInput {
+  title: String
+  author: UserUpdateOneWithoutMessagesInput
 }
 
 input MessageUpdateWithWhereUniqueWithoutAuthorInput {
   where: MessageWhereUniqueInput!
   data: MessageUpdateWithoutAuthorDataInput!
+}
+
+input MessageUpsertWithoutCommentsInput {
+  update: MessageUpdateWithoutCommentsDataInput!
+  create: MessageCreateWithoutCommentsInput!
 }
 
 input MessageUpsertWithWhereUniqueWithoutAuthorInput {
@@ -189,6 +452,9 @@ input MessageWhereInput {
   title_ends_with: String
   title_not_ends_with: String
   author: UserWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
   AND: [MessageWhereInput!]
   OR: [MessageWhereInput!]
   NOT: [MessageWhereInput!]
@@ -199,6 +465,12 @@ input MessageWhereUniqueInput {
 }
 
 type Mutation {
+  createComment(data: CommentCreateInput!): Comment!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
   createMessage(data: MessageCreateInput!): Message!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
@@ -231,6 +503,9 @@ type PageInfo {
 }
 
 type Query {
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   message(where: MessageWhereUniqueInput!): Message
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
@@ -241,6 +516,7 @@ type Query {
 }
 
 type Subscription {
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -248,7 +524,10 @@ type Subscription {
 type User {
   id: ID!
   name: String!
+  email: String!
+  password: String!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
 
 type UserConnection {
@@ -260,7 +539,15 @@ type UserConnection {
 input UserCreateInput {
   id: ID
   name: String!
+  email: String!
+  password: String!
   messages: MessageCreateManyWithoutAuthorInput
+  comments: CommentCreateManyWithoutPostedByInput
+}
+
+input UserCreateOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutMessagesInput {
@@ -268,9 +555,20 @@ input UserCreateOneWithoutMessagesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCommentsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  messages: MessageCreateManyWithoutAuthorInput
+}
+
 input UserCreateWithoutMessagesInput {
   id: ID
   name: String!
+  email: String!
+  password: String!
+  comments: CommentCreateManyWithoutPostedByInput
 }
 
 type UserEdge {
@@ -283,11 +581,17 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
 }
 
 type UserPreviousValues {
   id: ID!
   name: String!
+  email: String!
+  password: String!
 }
 
 type UserSubscriptionPayload {
@@ -310,11 +614,23 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   name: String
+  email: String
+  password: String
   messages: MessageUpdateManyWithoutAuthorInput
+  comments: CommentUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
+  email: String
+  password: String
+}
+
+input UserUpdateOneRequiredWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  update: UserUpdateWithoutCommentsDataInput
+  upsert: UserUpsertWithoutCommentsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneWithoutMessagesInput {
@@ -326,8 +642,23 @@ input UserUpdateOneWithoutMessagesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutCommentsDataInput {
+  name: String
+  email: String
+  password: String
+  messages: MessageUpdateManyWithoutAuthorInput
+}
+
 input UserUpdateWithoutMessagesDataInput {
   name: String
+  email: String
+  password: String
+  comments: CommentUpdateManyWithoutPostedByInput
+}
+
+input UserUpsertWithoutCommentsInput {
+  update: UserUpdateWithoutCommentsDataInput!
+  create: UserCreateWithoutCommentsInput!
 }
 
 input UserUpsertWithoutMessagesInput {
@@ -364,9 +695,40 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
   messages_none: MessageWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -374,6 +736,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 `
       }

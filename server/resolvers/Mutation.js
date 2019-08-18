@@ -1,7 +1,14 @@
+import Helpers from "../utils/helpers";
+
 export default {
   Mutation: {
-    signup: async (parent, { name }, context, info) => {
-      return await context.prisma.createUser({ name });
+    signup: async (parent, args, context, info) => {
+      const user = await context.prisma.user({ email: args.email });
+      if (user) {
+        throw Error("User already exists in the database");
+      }
+      const password = await Helpers.hassPassword(args.password);
+      return await context.prisma.createUser({ ...args, password });
     },
     deleteUser: async (parent, { id }, context) => {
       await context.prisma.deleteUser({ id });
