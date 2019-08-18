@@ -1,12 +1,12 @@
 type Message {
-  id: ID! @id
+  id: ID! @id @unique
   title: String!
   author: User @relation(name: "MessagesByUser", onDelete: SET_NULL)
   comments: [Comment]! @relation(name: "CommentsOnMessage", onDelete: CASCADE)
 }
 
 type User {
-  id: ID! @id
+  id: ID! @id @unique
   name: String!
   email: String! @unique
   password: String!
@@ -15,7 +15,7 @@ type User {
 }
 
 type Comment {
-  id: ID @id
+  id: ID! @id @unique
   text: String!
   message: Message! @relation(name: "CommentsOnMessage", onDelete: SET_NULL)
   postedBy: User! @relation(name: "CommentsByUser", onDelete: SET_NULL)
