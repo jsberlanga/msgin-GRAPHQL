@@ -1,10 +1,22 @@
 type Message {
   id: ID! @id
   title: String!
-  author: User @relation(name: "MessagesByUser", onDelete: CASCADE)
+  author: User @relation(name: "MessagesByUser", onDelete: SET_NULL)
+  comments: [Comment]! @relation(name: "CommentsOnMessage", onDelete: CASCADE)
 }
+
 type User {
   id: ID! @id
   name: String!
-  messages: [Message]! @relation(name: "MessagesByUser")
+  email: String! @unique
+  password: String!
+  messages: [Message]! @relation(name: "MessagesByUser", onDelete: CASCADE)
+  comments: [Comment]! @relation(name: "CommentsByUser", onDelete: CASCADE)
+}
+
+type Comment {
+  id: ID @id
+  text: String!
+  message: Message! @relation(name: "CommentsOnMessage", onDelete: SET_NULL)
+  postedBy: User! @relation(name: "CommentsByUser", onDelete: SET_NULL)
 }
