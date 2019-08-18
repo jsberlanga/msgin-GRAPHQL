@@ -10,6 +10,7 @@ export default {
       const password = await Helpers.hassPassword(args.password);
       const user = await context.prisma.createUser({ ...args, password });
       const token = "string";
+
       return {
         token,
         user
