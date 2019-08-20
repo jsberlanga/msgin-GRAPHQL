@@ -10,7 +10,7 @@ export default gql`
   type Message {
     id: ID!
     title: String!
-    author: User
+    author: User!
     comments: [Comment]!
   }
 `;

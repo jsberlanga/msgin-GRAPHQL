@@ -179,6 +179,8 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type Role = "ADMIN" | "USER";
+
 export type MessageOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -194,6 +196,8 @@ export type CommentOrderByInput =
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "role_ASC"
+  | "role_DESC"
   | "name_ASC"
   | "name_DESC"
   | "email_ASC"
@@ -203,12 +207,10 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneWithoutMessagesInput {
+export interface UserUpdateOneRequiredWithoutMessagesInput {
   create?: Maybe<UserCreateWithoutMessagesInput>;
   update?: Maybe<UserUpdateWithoutMessagesDataInput>;
   upsert?: Maybe<UserUpsertWithoutMessagesInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
@@ -349,6 +351,7 @@ export interface CommentUpdateInput {
 }
 
 export interface UserUpdateManyMutationInput {
+  role?: Maybe<Role>;
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
@@ -367,7 +370,7 @@ export type MessageWhereUniqueInput = AtLeastOne<{
 
 export interface MessageUpdateWithoutCommentsDataInput {
   title?: Maybe<String>;
-  author?: Maybe<UserUpdateOneWithoutMessagesInput>;
+  author?: Maybe<UserUpdateOneRequiredWithoutMessagesInput>;
 }
 
 export interface MessageUpdateManyMutationInput {
@@ -385,6 +388,7 @@ export type UserWhereUniqueInput = AtLeastOne<{
 }>;
 
 export interface UserUpdateWithoutMessagesDataInput {
+  role?: Maybe<Role>;
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
@@ -437,6 +441,10 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  role?: Maybe<Role>;
+  role_not?: Maybe<Role>;
+  role_in?: Maybe<Role[] | Role>;
+  role_not_in?: Maybe<Role[] | Role>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -534,7 +542,7 @@ export interface MessageScalarWhereInput {
 export interface MessageCreateWithoutCommentsInput {
   id?: Maybe<ID_Input>;
   title: String;
-  author?: Maybe<UserCreateOneWithoutMessagesInput>;
+  author: UserCreateOneWithoutMessagesInput;
 }
 
 export interface MessageUpsertWithWhereUniqueWithoutAuthorInput {
@@ -545,6 +553,7 @@ export interface MessageUpsertWithWhereUniqueWithoutAuthorInput {
 
 export interface UserCreateWithoutMessagesInput {
   id?: Maybe<ID_Input>;
+  role?: Maybe<Role>;
   name: String;
   email: String;
   password: String;
@@ -598,6 +607,7 @@ export interface CommentUpdateManyWithWhereNestedInput {
 
 export interface UserCreateWithoutCommentsInput {
   id?: Maybe<ID_Input>;
+  role?: Maybe<Role>;
   name: String;
   email: String;
   password: String;
@@ -625,6 +635,7 @@ export interface UserUpsertWithoutMessagesInput {
 }
 
 export interface UserUpdateInput {
+  role?: Maybe<Role>;
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
@@ -639,7 +650,7 @@ export interface MessageUpsertWithoutCommentsInput {
 
 export interface MessageUpdateInput {
   title?: Maybe<String>;
-  author?: Maybe<UserUpdateOneWithoutMessagesInput>;
+  author?: Maybe<UserUpdateOneRequiredWithoutMessagesInput>;
   comments?: Maybe<CommentUpdateManyWithoutMessageInput>;
 }
 
@@ -656,6 +667,7 @@ export interface UserUpsertWithoutCommentsInput {
 }
 
 export interface UserUpdateWithoutCommentsDataInput {
+  role?: Maybe<Role>;
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
@@ -711,6 +723,7 @@ export interface MessageCreateManyWithoutAuthorInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
+  role?: Maybe<Role>;
   name: String;
   email: String;
   password: String;
@@ -759,7 +772,7 @@ export interface MessageUpdateWithoutAuthorDataInput {
 export interface MessageCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
-  author?: Maybe<UserCreateOneWithoutMessagesInput>;
+  author: UserCreateOneWithoutMessagesInput;
   comments?: Maybe<CommentCreateManyWithoutMessageInput>;
 }
 
@@ -790,6 +803,7 @@ export interface NodeNode {
 
 export interface UserPreviousValues {
   id: ID_Output;
+  role?: Role;
   name: String;
   email: String;
   password: String;
@@ -799,6 +813,7 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  role: () => Promise<Role>;
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
@@ -808,6 +823,7 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  role: () => Promise<AsyncIterator<Role>>;
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
@@ -931,6 +947,7 @@ export interface MessageSubscriptionPayloadSubscription
 
 export interface User {
   id: ID_Output;
+  role?: Role;
   name: String;
   email: String;
   password: String;
@@ -938,6 +955,7 @@ export interface User {
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
+  role: () => Promise<Role>;
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
@@ -965,6 +983,7 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  role: () => Promise<AsyncIterator<Role>>;
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
@@ -992,6 +1011,7 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  role: () => Promise<Role>;
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
@@ -1335,6 +1355,10 @@ export const models: Model[] = [
   },
   {
     name: "Comment",
+    embedded: false
+  },
+  {
+    name: "Role",
     embedded: false
   }
 ];

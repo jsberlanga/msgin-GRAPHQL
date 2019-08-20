@@ -8,6 +8,7 @@ export default gql`
   extend type Mutation {
     signup(name: String!, email: String!, password: String!): AuthPayload!
     deleteUser(id: ID!): SuccessMessage!
+    deleteAllUsers: SuccessMessage!
   }
   type User {
     id: ID!

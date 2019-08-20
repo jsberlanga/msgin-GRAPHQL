@@ -250,7 +250,7 @@ scalar Long
 type Message {
   id: ID!
   title: String!
-  author: User
+  author: User!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
 
@@ -263,7 +263,7 @@ type MessageConnection {
 input MessageCreateInput {
   id: ID
   title: String!
-  author: UserCreateOneWithoutMessagesInput
+  author: UserCreateOneWithoutMessagesInput!
   comments: CommentCreateManyWithoutMessageInput
 }
 
@@ -286,7 +286,7 @@ input MessageCreateWithoutAuthorInput {
 input MessageCreateWithoutCommentsInput {
   id: ID
   title: String!
-  author: UserCreateOneWithoutMessagesInput
+  author: UserCreateOneWithoutMessagesInput!
 }
 
 type MessageEdge {
@@ -360,7 +360,7 @@ input MessageSubscriptionWhereInput {
 
 input MessageUpdateInput {
   title: String
-  author: UserUpdateOneWithoutMessagesInput
+  author: UserUpdateOneRequiredWithoutMessagesInput
   comments: CommentUpdateManyWithoutMessageInput
 }
 
@@ -403,7 +403,7 @@ input MessageUpdateWithoutAuthorDataInput {
 
 input MessageUpdateWithoutCommentsDataInput {
   title: String
-  author: UserUpdateOneWithoutMessagesInput
+  author: UserUpdateOneRequiredWithoutMessagesInput
 }
 
 input MessageUpdateWithWhereUniqueWithoutAuthorInput {
@@ -515,6 +515,11 @@ type Query {
   node(id: ID!): Node
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 type Subscription {
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
@@ -523,6 +528,7 @@ type Subscription {
 
 type User {
   id: ID!
+  role: Role
   name: String!
   email: String!
   password: String!
@@ -538,6 +544,7 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
+  role: Role
   name: String!
   email: String!
   password: String!
@@ -557,6 +564,7 @@ input UserCreateOneWithoutMessagesInput {
 
 input UserCreateWithoutCommentsInput {
   id: ID
+  role: Role
   name: String!
   email: String!
   password: String!
@@ -565,6 +573,7 @@ input UserCreateWithoutCommentsInput {
 
 input UserCreateWithoutMessagesInput {
   id: ID
+  role: Role
   name: String!
   email: String!
   password: String!
@@ -579,6 +588,8 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  role_ASC
+  role_DESC
   name_ASC
   name_DESC
   email_ASC
@@ -589,6 +600,7 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
+  role: Role
   name: String!
   email: String!
   password: String!
@@ -613,6 +625,7 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  role: Role
   name: String
   email: String
   password: String
@@ -621,6 +634,7 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
+  role: Role
   name: String
   email: String
   password: String
@@ -633,16 +647,15 @@ input UserUpdateOneRequiredWithoutCommentsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneWithoutMessagesInput {
+input UserUpdateOneRequiredWithoutMessagesInput {
   create: UserCreateWithoutMessagesInput
   update: UserUpdateWithoutMessagesDataInput
   upsert: UserUpsertWithoutMessagesInput
-  delete: Boolean
-  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
 input UserUpdateWithoutCommentsDataInput {
+  role: Role
   name: String
   email: String
   password: String
@@ -650,6 +663,7 @@ input UserUpdateWithoutCommentsDataInput {
 }
 
 input UserUpdateWithoutMessagesDataInput {
+  role: Role
   name: String
   email: String
   password: String
@@ -681,6 +695,10 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  role: Role
+  role_not: Role
+  role_in: [Role!]
+  role_not_in: [Role!]
   name: String
   name_not: String
   name_in: [String!]

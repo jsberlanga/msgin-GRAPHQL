@@ -7,6 +7,7 @@ type Message {
 
 type User {
   id: ID! @id @unique
+  role: Role @default(value: USER)
   name: String!
   email: String! @unique
   password: String!
@@ -19,4 +20,9 @@ type Comment {
   text: String!
   message: Message! @relation(name: "CommentsOnMessage", onDelete: SET_NULL)
   postedBy: User! @relation(name: "CommentsByUser", onDelete: SET_NULL)
+}
+
+enum Role {
+  ADMIN
+  USER
 }
