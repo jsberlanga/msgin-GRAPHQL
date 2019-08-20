@@ -14,13 +14,13 @@ const SIGNIN_MUTATION = gql`
   }
 `;
 
-const Signin = props => {
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION);
   return (
     <>
-      <h1>{props.title}</h1>
+      <h1>Login to your account</h1>
       {loading && <p>Loading...</p>}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}

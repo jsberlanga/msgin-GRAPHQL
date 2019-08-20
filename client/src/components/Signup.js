@@ -14,7 +14,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-const Signup = props => {
+const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ const Signup = props => {
 
   return (
     <>
-      <h1>{props.title}</h1>
+      <h1>Register an account</h1>
       {loading && <p>Loading...</p>}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}

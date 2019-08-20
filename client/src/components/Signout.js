@@ -10,11 +10,10 @@ const SIGNOUT_MUTATION = gql`
   }
 `;
 
-const Signout = props => {
+const Signout = () => {
   const [signout, { error, loading }] = useMutation(SIGNOUT_MUTATION);
   return (
     <>
-      <h1>{props.title}</h1>
       {loading && <p>Loading...</p>}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}

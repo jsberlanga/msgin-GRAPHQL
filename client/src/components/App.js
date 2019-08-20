@@ -1,19 +1,27 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Header from "./globals/Header/index";
+
+import Home from "./Home";
 import Signup from "./Signup";
 import Signin from "./Signin";
-import Signout from "./Signout";
 import CreateMessage from "./CreateMessage";
 import MessageList from "./MessageList/MessageList";
 
 const App = () => {
   return (
-    <div className="container">
-      <Signup title="Signup" />
-      <Signin title="Signin" />
-      <Signout title="Signout" />
-      <CreateMessage title="CreateMessage" />
-      <MessageList title="Message List" />
-    </div>
+    <>
+      <Header />
+      <div className="container">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/add" component={CreateMessage} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/signin" component={Signin} />
+          <Route exact path="/messages" component={MessageList} />
+        </Switch>
+      </div>
+    </>
   );
 };
 
