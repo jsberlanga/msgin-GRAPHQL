@@ -8,16 +8,6 @@ const { prisma } = require("./generated/prisma-client");
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  playground: true,
-  context: req => ({
-    ...req,
-    prisma
-  })
-});
-
 const app = express();
 
 var corsOptions = {
@@ -28,10 +18,31 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: true,
+  context: req => ({
+    ...req,
+    prisma
+  })
+});
+
 app.use((req, res, next) => {
   const { token } = req.cookies;
   if (token) {
-    const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+    const { userId } = jwt.verify(
+      token,
+      process.env.JWT_SECRET,
+      (err, decoded) => {
+        if (err) {
+          if (err.name === "TokenExpiredError") {
+            throw Error("We are fucked");
+          }
+        }
+        return decoded;
+      }
+    );
     req.userId = userId;
   }
   next();
