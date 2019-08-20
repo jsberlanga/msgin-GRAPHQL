@@ -1,0 +1,24 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  text-align: center;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.message-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.message {
+  background: #eeeeee;
+}
