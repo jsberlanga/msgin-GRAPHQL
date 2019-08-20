@@ -15,9 +15,7 @@ ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <React.Suspense
-        fallback={
-          <h1 className="container container__loading">Loading Application</h1>
-        }
+        fallback={<h1 className="container container__loading">Loading</h1>}
       >
         <App />
       </React.Suspense>

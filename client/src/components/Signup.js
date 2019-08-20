@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+
+import { ME_QUERY } from "./globals/Header";
 
 const SIGNUP_MUTATION = gql`
   mutation signup($name: String!, $email: String!, $password: String!) {
@@ -14,11 +16,13 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-const Signup = () => {
+const Signup = props => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION);
+
+  const { refetch } = useQuery(ME_QUERY);
 
   return (
     <>
@@ -30,6 +34,8 @@ const Signup = () => {
         onSubmit={async e => {
           e.preventDefault();
           await signup({ variables: { name, email, password } });
+          props.history.push("/");
+          refetch();
         }}
       >
         <label htmlFor="name">Name</label>

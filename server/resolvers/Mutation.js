@@ -39,8 +39,8 @@ export default {
         user
       };
     },
-    signout: async (parent, args, context) => {
-      await context.res.clearCookie("token");
+    signout: (parent, args, context) => {
+      context.res.clearCookie("token");
       return {
         message: "Bye"
       };

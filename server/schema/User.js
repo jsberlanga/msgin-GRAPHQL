@@ -4,6 +4,7 @@ export default gql`
   extend type Query {
     getUser(id: ID!): User!
     getUsers: [User]!
+    me: User
   }
   extend type Mutation {
     signup(name: String!, email: String!, password: String!): AuthPayload!

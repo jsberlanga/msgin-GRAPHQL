@@ -13,7 +13,7 @@ const CREATE_MESSAGE_MUTATION = gql`
   }
 `;
 
-const CreateMessage = () => {
+const CreateMessage = props => {
   const [title, setTitle] = useState("");
   const [createMessage, { error, loading }] = useMutation(
     CREATE_MESSAGE_MUTATION
@@ -29,8 +29,8 @@ const CreateMessage = () => {
         onSubmit={async e => {
           e.preventDefault();
           await createMessage({ variables: { title } });
-          refetch();
-          setTitle("");
+          await refetch();
+          props.history.push("/messages");
         }}
       >
         <label htmlFor="title">Title</label>
