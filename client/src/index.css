@@ -7,6 +7,12 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+button,
+a,
+input {
+  font-family: "Roboto", sans-serif;
+}
+
 .navbar {
   display: flex;
   justify-content: space-around;
