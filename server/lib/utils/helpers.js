@@ -6,6 +6,9 @@ const Helpers = {
     const saltRounds = 10;
     return await bcrypt.hash(pass, saltRounds);
   },
+  passwordIsValid: async (passPassed, passInDB) => {
+    return await bcrypt.compare(passPassed, passInDB);
+  },
   generateToken: userId => {
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
       expiresIn: "7 days"
@@ -18,9 +21,14 @@ const Helpers = {
       maxAge: 604800
     });
   },
-  getUserId: token => {
+  getUserId: context => {
+    const { token } = context.req.cookies;
+    if (!token) {
+      throw Error("You must be authenticated!");
+    }
     const user = jwt.verify(token, process.env.JWT_SECRET);
-    return user;
+
+    return user.userId;
   }
 };
 
