@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import Signout from "./Signout";
