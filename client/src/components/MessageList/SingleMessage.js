@@ -29,6 +29,7 @@ const GET_MESSAGE_QUERY = gql`
 `;
 
 const SingleMessage = props => {
+  console.log(props);
   const { data, error, loading } = useQuery(GET_MESSAGE_QUERY, {
     variables: { id: props.match.params.id }
   });
@@ -49,7 +50,7 @@ const SingleMessage = props => {
           </li>
         ))}
       </ul>
-      <button onClick={() => props.history.push("/messages")}>Go back</button>
+      <button onClick={() => props.history.goBack()}>Go back</button>
     </div>
   );
 };

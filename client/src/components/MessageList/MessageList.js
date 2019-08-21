@@ -13,6 +13,9 @@ const GET_MESSAGES_QUERY = gql`
         id
         name
       }
+      comments {
+        id
+      }
     }
   }
 `;

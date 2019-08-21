@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 
 import { ME_QUERY } from "../context/UserContext";
@@ -22,7 +23,15 @@ const Profile = () => {
         <ul>
           {data.me.comments.map((comment, idx) => (
             <li key={comment.id}>
-              {idx + 1}. {comment.text}
+              <p>
+                {idx + 1}. {comment.text}
+              </p>
+              <p>
+                From message:{" "}
+                <Link to={`/message/${comment.message.id}`}>
+                  {comment.message.title}
+                </Link>
+              </p>
             </li>
           ))}
         </ul>

@@ -71,6 +71,28 @@ export default {
         }
       });
     },
+
+    // COMMENTS MUTATIONS
+    createComment: async (parent, { text, messageId }, context) => {
+      const userId = Helpers.getUserId(context);
+
+      const comment = await context.prisma.createComment({
+        text,
+        postedBy: {
+          connect: {
+            id: userId
+          }
+        },
+        message: {
+          connect: {
+            id: messageId
+          }
+        }
+      });
+
+      return comment;
+    },
+
     // ONLY ADMIN ACCESS
     deleteAllUsers: async (parent, args, context) => {
       await context.prisma.deleteManyUsers();

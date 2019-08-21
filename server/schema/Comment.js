@@ -5,7 +5,7 @@ export default gql`
     getComments: [Comment]!
   }
   extend type Mutation {
-    createComment(text: String!): Comment!
+    createComment(messageId: ID!, text: String!): Comment!
   }
   type Comment {
     id: ID!
