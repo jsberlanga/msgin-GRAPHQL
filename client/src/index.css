@@ -1,10 +1,14 @@
 html {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Roboto", sans-serif;
+  letter-spacing: 0.5px;
+  color: darkslategrey;
+  background: #fffefe;
 }
 
 button,
@@ -12,6 +16,32 @@ a,
 input[type="submit"] {
   font-family: "Roboto", sans-serif;
   cursor: pointer;
+}
+
+form {
+  border: 2px solid pink;
+  padding: 2rem;
+  display: grid;
+  width: 30rem;
+}
+
+input {
+  padding: 0.5rem;
+  border: none;
+  background: #ebebeb;
+}
+
+label {
+  margin: 1rem 0 0.4rem;
+}
+
+button,
+input[type="submit"] {
+  border: none;
+  background: palevioletred;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem;
 }
 
 li {
@@ -43,7 +73,7 @@ li {
 }
 
 .container {
-  text-align: center;
+  /* text-align: center; */
   max-width: 70rem;
   margin: 0 auto;
 }
@@ -58,15 +88,15 @@ li {
 
 .message-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 3rem;
 }
 
 .message {
-  background: #deebdf;
+  background: rgb(248, 238, 240);
   min-height: 10rem;
   padding: 2rem;
-  box-shadow: 1px 1px 5px silver;
+  box-shadow: 1px 1px 2px rgb(230, 220, 223);
 }
 
 /* PROFILE */
@@ -75,5 +105,36 @@ li {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1rem;
-  background: #eeeeee;
+  background: rgb(235, 210, 215);
+  padding: 2rem;
+}
+
+/* SPINNER */
+.lds-dual-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid pink;
+  border-color: pink transparent pink transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
