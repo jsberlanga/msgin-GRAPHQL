@@ -5,7 +5,10 @@ import { useQuery } from "@apollo/react-hooks";
 import { ME_QUERY } from "../../context/UserContext";
 
 const Profile = () => {
-  const { data } = useQuery(ME_QUERY);
+  const { data, refetch } = useQuery(ME_QUERY);
+  React.useEffect(() => {
+    refetch();
+  }, []);
   return (
     <div className="profile--grid">
       <div>
