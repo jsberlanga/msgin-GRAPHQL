@@ -8,7 +8,6 @@ const AuthenticatedApp = React.lazy(() => import("./AuthenticatedApp"));
 
 const App = props => {
   const { data } = useQuery(ME_QUERY);
-  console.log(data);
   return !data.me ? (
     <React.Suspense
       fallback={<h1 className="container container__loading">Loading</h1>}

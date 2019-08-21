@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Message = ({ message }) => {
-  console.log(message);
   return (
     <div className="message">
       <p>Title:{message.title}</p>
