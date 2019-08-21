@@ -250,6 +250,7 @@ scalar Long
 type Message {
   id: ID!
   title: String!
+  body: String!
   author: User!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
@@ -263,6 +264,7 @@ type MessageConnection {
 input MessageCreateInput {
   id: ID
   title: String!
+  body: String!
   author: UserCreateOneWithoutMessagesInput!
   comments: CommentCreateManyWithoutMessageInput
 }
@@ -280,12 +282,14 @@ input MessageCreateOneWithoutCommentsInput {
 input MessageCreateWithoutAuthorInput {
   id: ID
   title: String!
+  body: String!
   comments: CommentCreateManyWithoutMessageInput
 }
 
 input MessageCreateWithoutCommentsInput {
   id: ID
   title: String!
+  body: String!
   author: UserCreateOneWithoutMessagesInput!
 }
 
@@ -299,11 +303,14 @@ enum MessageOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  body_ASC
+  body_DESC
 }
 
 type MessagePreviousValues {
   id: ID!
   title: String!
+  body: String!
 }
 
 input MessageScalarWhereInput {
@@ -335,6 +342,20 @@ input MessageScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
   AND: [MessageScalarWhereInput!]
   OR: [MessageScalarWhereInput!]
   NOT: [MessageScalarWhereInput!]
@@ -360,16 +381,19 @@ input MessageSubscriptionWhereInput {
 
 input MessageUpdateInput {
   title: String
+  body: String
   author: UserUpdateOneRequiredWithoutMessagesInput
   comments: CommentUpdateManyWithoutMessageInput
 }
 
 input MessageUpdateManyDataInput {
   title: String
+  body: String
 }
 
 input MessageUpdateManyMutationInput {
   title: String
+  body: String
 }
 
 input MessageUpdateManyWithoutAuthorInput {
@@ -398,11 +422,13 @@ input MessageUpdateOneRequiredWithoutCommentsInput {
 
 input MessageUpdateWithoutAuthorDataInput {
   title: String
+  body: String
   comments: CommentUpdateManyWithoutMessageInput
 }
 
 input MessageUpdateWithoutCommentsDataInput {
   title: String
+  body: String
   author: UserUpdateOneRequiredWithoutMessagesInput
 }
 
@@ -451,6 +477,20 @@ input MessageWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
   author: UserWhereInput
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput

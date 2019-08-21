@@ -1,6 +1,7 @@
 type Message {
   id: ID! @id @unique
   title: String!
+  body: String!
   author: User! @relation(name: "MessagesByUser", onDelete: SET_NULL)
   comments: [Comment]! @relation(name: "CommentsOnMessage", onDelete: CASCADE)
 }

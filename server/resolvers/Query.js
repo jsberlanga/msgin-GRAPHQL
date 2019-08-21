@@ -3,7 +3,6 @@ import Helpers from "../lib/utils/helpers";
 export default {
   Query: {
     me: async (parent, args, context) => {
-      // const userId = Helpers.getUserId(context);
       if (!context.req.userId) {
         return null;
       }

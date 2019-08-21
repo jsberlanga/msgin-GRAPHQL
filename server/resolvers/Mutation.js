@@ -52,7 +52,7 @@ export default {
       };
     },
     // MESSAGE MUTATIONS
-    createMessage: async (parent, { title }, context) => {
+    createMessage: async (parent, { title, body }, context) => {
       const userId = Helpers.getUserId(context);
       if (!userId) {
         throw Error("You must be authenticated!");
@@ -64,6 +64,7 @@ export default {
       const email = user.email;
       return await context.prisma.createMessage({
         title,
+        body,
         author: {
           connect: {
             email

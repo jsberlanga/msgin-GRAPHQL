@@ -185,7 +185,9 @@ export type MessageOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "title_ASC"
-  | "title_DESC";
+  | "title_DESC"
+  | "body_ASC"
+  | "body_DESC";
 
 export type CommentOrderByInput =
   | "id_ASC"
@@ -252,6 +254,20 @@ export interface MessageWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  body?: Maybe<String>;
+  body_not?: Maybe<String>;
+  body_in?: Maybe<String[] | String>;
+  body_not_in?: Maybe<String[] | String>;
+  body_lt?: Maybe<String>;
+  body_lte?: Maybe<String>;
+  body_gt?: Maybe<String>;
+  body_gte?: Maybe<String>;
+  body_contains?: Maybe<String>;
+  body_not_contains?: Maybe<String>;
+  body_starts_with?: Maybe<String>;
+  body_not_starts_with?: Maybe<String>;
+  body_ends_with?: Maybe<String>;
+  body_not_ends_with?: Maybe<String>;
   author?: Maybe<UserWhereInput>;
   comments_every?: Maybe<CommentWhereInput>;
   comments_some?: Maybe<CommentWhereInput>;
@@ -305,6 +321,7 @@ export interface CommentWhereInput {
 export interface MessageCreateWithoutAuthorInput {
   id?: Maybe<ID_Input>;
   title: String;
+  body: String;
   comments?: Maybe<CommentCreateManyWithoutMessageInput>;
 }
 
@@ -370,11 +387,13 @@ export type MessageWhereUniqueInput = AtLeastOne<{
 
 export interface MessageUpdateWithoutCommentsDataInput {
   title?: Maybe<String>;
+  body?: Maybe<String>;
   author?: Maybe<UserUpdateOneRequiredWithoutMessagesInput>;
 }
 
 export interface MessageUpdateManyMutationInput {
   title?: Maybe<String>;
+  body?: Maybe<String>;
 }
 
 export interface MessageUpdateManyWithWhereNestedInput {
@@ -424,6 +443,7 @@ export interface CommentUpdateManyWithoutPostedByInput {
 
 export interface MessageUpdateManyDataInput {
   title?: Maybe<String>;
+  body?: Maybe<String>;
 }
 
 export interface UserWhereInput {
@@ -534,6 +554,20 @@ export interface MessageScalarWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  body?: Maybe<String>;
+  body_not?: Maybe<String>;
+  body_in?: Maybe<String[] | String>;
+  body_not_in?: Maybe<String[] | String>;
+  body_lt?: Maybe<String>;
+  body_lte?: Maybe<String>;
+  body_gt?: Maybe<String>;
+  body_gte?: Maybe<String>;
+  body_contains?: Maybe<String>;
+  body_not_contains?: Maybe<String>;
+  body_starts_with?: Maybe<String>;
+  body_not_starts_with?: Maybe<String>;
+  body_ends_with?: Maybe<String>;
+  body_not_ends_with?: Maybe<String>;
   AND?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
   OR?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
   NOT?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
@@ -542,6 +576,7 @@ export interface MessageScalarWhereInput {
 export interface MessageCreateWithoutCommentsInput {
   id?: Maybe<ID_Input>;
   title: String;
+  body: String;
   author: UserCreateOneWithoutMessagesInput;
 }
 
@@ -650,6 +685,7 @@ export interface MessageUpsertWithoutCommentsInput {
 
 export interface MessageUpdateInput {
   title?: Maybe<String>;
+  body?: Maybe<String>;
   author?: Maybe<UserUpdateOneRequiredWithoutMessagesInput>;
   comments?: Maybe<CommentUpdateManyWithoutMessageInput>;
 }
@@ -766,12 +802,14 @@ export interface CommentUpdateManyWithoutMessageInput {
 
 export interface MessageUpdateWithoutAuthorDataInput {
   title?: Maybe<String>;
+  body?: Maybe<String>;
   comments?: Maybe<CommentUpdateManyWithoutMessageInput>;
 }
 
 export interface MessageCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
+  body: String;
   author: UserCreateOneWithoutMessagesInput;
   comments?: Maybe<CommentCreateManyWithoutMessageInput>;
 }
@@ -848,11 +886,13 @@ export interface AggregateCommentSubscription
 export interface Message {
   id: ID_Output;
   title: String;
+  body: String;
 }
 
 export interface MessagePromise extends Promise<Message>, Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  body: () => Promise<String>;
   author: <T = UserPromise>() => T;
   comments: <T = FragmentableArray<Comment>>(args?: {
     where?: CommentWhereInput;
@@ -870,6 +910,7 @@ export interface MessageSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  body: () => Promise<AsyncIterator<String>>;
   author: <T = UserSubscription>() => T;
   comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
     where?: CommentWhereInput;
@@ -887,6 +928,7 @@ export interface MessageNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  body: () => Promise<String>;
   author: <T = UserPromise>() => T;
   comments: <T = FragmentableArray<Comment>>(args?: {
     where?: CommentWhereInput;
@@ -1092,6 +1134,7 @@ export interface UserConnectionSubscription
 export interface MessagePreviousValues {
   id: ID_Output;
   title: String;
+  body: String;
 }
 
 export interface MessagePreviousValuesPromise
@@ -1099,6 +1142,7 @@ export interface MessagePreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  body: () => Promise<String>;
 }
 
 export interface MessagePreviousValuesSubscription
@@ -1106,6 +1150,7 @@ export interface MessagePreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  body: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
