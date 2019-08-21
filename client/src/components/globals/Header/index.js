@@ -3,24 +3,8 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import Signout from "../../Signout";
 
-import { gql } from "apollo-boost";
-
-import UserContext from "../../../context/UserContext";
-
-const ME_QUERY = gql`
-  query ME_QUERY {
-    me {
-      id
-      name
-      email
-    }
-  }
-`;
-
 const Header = props => {
-  const user = React.useContext(UserContext);
-
-  if (!user.me) {
+  if (!props.user.me) {
     return (
       <nav className="navbar">
         <div className="navbar__options">
@@ -41,7 +25,7 @@ const Header = props => {
         <Link to="/messages">Messages</Link>
       </div>
       <div className="navbar__auth">
-        <span>Welcome {user.me.name}</span>
+        <span>Welcome {props.user.me.name}</span>
         <Signout history={props.history} />
       </div>
     </nav>
@@ -49,4 +33,3 @@ const Header = props => {
 };
 
 export default withRouter(Header);
-export { ME_QUERY };

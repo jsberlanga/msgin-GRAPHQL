@@ -17,7 +17,7 @@ const GET_MESSAGES_QUERY = gql`
   }
 `;
 
-const MessageList = () => {
+const MessageList = props => {
   const { data, error, loading } = useQuery(GET_MESSAGES_QUERY);
 
   if (loading) return "Loading...";
