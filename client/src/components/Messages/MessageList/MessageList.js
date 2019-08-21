@@ -9,6 +9,7 @@ const GET_MESSAGES_QUERY = gql`
     getMessages {
       id
       title
+      body
       author {
         id
         name
@@ -28,7 +29,7 @@ const MessageList = props => {
 
   return (
     <>
-      <h1>The Latest News</h1>
+      <h1>The Latest Messages</h1>
       <div className="message-list">
         {data &&
           data.getMessages.map(message => (

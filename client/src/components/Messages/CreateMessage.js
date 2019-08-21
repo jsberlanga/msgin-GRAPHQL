@@ -5,16 +5,18 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { GET_MESSAGES_QUERY } from "./MessageList/MessageList";
 
 const CREATE_MESSAGE_MUTATION = gql`
-  mutation createMessage($title: String!) {
-    createMessage(title: $title) {
+  mutation createMessage($title: String!, $body: String!) {
+    createMessage(title: $title, body: $body) {
       id
       title
+      body
     }
   }
 `;
 
 const CreateMessage = props => {
   const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [createMessage, { error, loading }] = useMutation(
     CREATE_MESSAGE_MUTATION
   );
@@ -27,12 +29,12 @@ const CreateMessage = props => {
       <form
         onSubmit={async e => {
           e.preventDefault();
-          await createMessage({ variables: { title } });
+          await createMessage({ variables: { title, body } });
           await refetch();
           props.history.push("/messages");
         }}
       >
-        <h1>Create a new message</h1>
+        <h1>Publish a Message</h1>
 
         <label htmlFor="title">Title</label>
         <input
@@ -42,7 +44,16 @@ const CreateMessage = props => {
           onChange={e => setTitle(e.target.value)}
         />
 
-        <input type="submit" value="submit" />
+        <label htmlFor="body">Body</label>
+        <textarea
+          id="body"
+          type="text"
+          value={body}
+          onChange={e => setBody(e.target.value)}
+          rows="5"
+        />
+
+        <input type="submit" value="Publish" />
       </form>
     </>
   );

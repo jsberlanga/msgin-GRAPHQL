@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 const Message = ({ message }) => {
   return (
     <div className="message">
-      <p>Title:{message.title}</p>
-      <p>Author: {message.author.name}</p>
+      <h3>{message.title}</h3>
+      <p>{message.body}</p>
+      <p>Written by: {message.author.name}</p>
       <p>
         {message.comments.length
           ? message.comments.length > 1

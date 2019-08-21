@@ -21,8 +21,8 @@ const Header = props => {
     <nav className="navbar">
       <div className="navbar__options">
         <Link to="/">Home</Link>
-        <Link to="/add">Add New Message</Link>
-        <Link to="/messages">News</Link>
+        <Link to="/add">New Message</Link>
+        <Link to="/messages">Messages</Link>
       </div>
       <div className="navbar__auth">
         <Link to="/profile">Welcome {props.user.me.name}</Link>
