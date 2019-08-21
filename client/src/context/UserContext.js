@@ -7,6 +7,22 @@ const ME_QUERY = gql`
       id
       name
       email
+      messages {
+        id
+        title
+        comments {
+          id
+          text
+        }
+      }
+      comments {
+        id
+        text
+        message {
+          id
+          title
+        }
+      }
     }
   }
 `;

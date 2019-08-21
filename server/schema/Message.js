@@ -7,6 +7,7 @@ export default gql`
   }
   extend type Query {
     getMessages: [Message!]!
+    getMessage(id: ID!): Message
   }
   type Message {
     id: ID!

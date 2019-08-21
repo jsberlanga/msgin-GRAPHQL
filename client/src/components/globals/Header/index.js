@@ -25,7 +25,7 @@ const Header = props => {
         <Link to="/messages">Messages</Link>
       </div>
       <div className="navbar__auth">
-        <span>Welcome {props.user.me.name}</span>
+        <Link to="/profile">Welcome {props.user.me.name}</Link>
         <Signout history={props.history} />
       </div>
     </nav>

@@ -19,6 +19,9 @@ export default {
     getMessages: async (parent, args, context) => {
       return await context.prisma.messages();
     },
+    getMessage: async (parent, { id }, context) => {
+      return await context.prisma.message({ id });
+    },
     getComments: async (parent, args, context) => {
       return await context.prisma.comments();
     }
