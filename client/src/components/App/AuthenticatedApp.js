@@ -3,10 +3,10 @@ import { Switch, Route } from "react-router-dom";
 
 import Header from "../globals/Header/index";
 import Home from "../Home";
-import CreateMessage from "../CreateMessage";
-import MessageList from "../MessageList/MessageList";
-import SingleMessage from "../MessageList/SingleMessage";
-import Profile from "../Profile";
+import CreateMessage from "../Messages/CreateMessage";
+import MessageList from "../Messages/MessageList/MessageList";
+import SingleMessage from "../Messages/MessageList/SingleMessage";
+import Profile from "../Profile/Profile";
 import NotFound from "../NotFound";
 
 const AuthenticatedApp = ({ user, loading }) => {

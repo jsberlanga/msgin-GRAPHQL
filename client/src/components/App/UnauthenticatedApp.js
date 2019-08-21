@@ -3,8 +3,8 @@ import { Switch, Route } from "react-router-dom";
 
 import Header from "../globals/Header/index";
 import Home from "../Home";
-import Signup from "../Signup";
-import Signin from "../Signin";
+import Signup from "../Auth/Signup";
+import Signin from "../Auth/Signin";
 import NotFound from "../NotFound";
 
 const UnauthenticatedApp = ({ user, loading }) => {

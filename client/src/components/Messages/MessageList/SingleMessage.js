@@ -3,8 +3,8 @@ import { gql } from "apollo-boost";
 
 import { useQuery } from "@apollo/react-hooks";
 
-import Error from "../globals/Error";
-import CreateComment from "../Comments/CreateComment";
+import Error from "../../globals/Error";
+import CreateComment from "../../Comments/CreateComment";
 
 const GET_MESSAGE_QUERY = gql`
   query GET_MESSAGE_QUERY($id: ID!) {

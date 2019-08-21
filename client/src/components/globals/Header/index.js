@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import Signout from "../../Signout";
+import Signout from "../../Auth/Signout";
 
 const Header = props => {
   if (!props.user.me) {

@@ -2,7 +2,7 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
-import { ME_QUERY } from "../context/UserContext";
+import { ME_QUERY } from "../../context/UserContext";
 
 const SIGNOUT_MUTATION = gql`
   mutation signout {

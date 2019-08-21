@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
-import { ME_QUERY } from "../context/UserContext";
+import { ME_QUERY } from "../../context/UserContext";
 
 const SIGNIN_MUTATION = gql`
   mutation signin($email: String!, $password: String!) {
