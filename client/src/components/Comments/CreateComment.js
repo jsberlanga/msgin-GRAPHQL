@@ -14,7 +14,7 @@ const CREATE_COMMENT_MUTATION = gql`
 `;
 
 const CreateComment = ({ messageId }) => {
-  const [text, setText] = React.useState("");
+  const [text, setText] = React.useState(commentTemplate);
   const [createComment, { data, error, loading }] = useMutation(
     CREATE_COMMENT_MUTATION,
     {
@@ -44,5 +44,8 @@ const CreateComment = ({ messageId }) => {
     </form>
   );
 };
+
+const commentTemplate =
+  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.";
 
 export default CreateComment;

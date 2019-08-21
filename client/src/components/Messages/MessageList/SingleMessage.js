@@ -11,6 +11,7 @@ const GET_MESSAGE_QUERY = gql`
     getMessage(id: $id) {
       id
       title
+      body
       author {
         id
         name
@@ -38,22 +39,31 @@ const SingleMessage = props => {
   if (!data.getMessage)
     return <Error>The queried message does not exist.</Error>;
 
-  console.log(data.getMessage.id);
   return (
     <div>
       <h1>{data.getMessage.title}</h1>
-      <p>Posted by: {data.getMessage.author.name}</p>
+      <p>{data.getMessage.body}</p>
+      <p>This message was written by {data.getMessage.author.name}</p>
       <CreateComment messageId={data.getMessage.id} />
-      <hr />
-      <h3>Comments:</h3>
-      <ul>
-        {data.getMessage.comments.map(comment => (
-          <li key={comment.id}>
-            {comment.text}. Posted by {comment.postedBy.name}
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => props.history.goBack()}>Go back</button>
+      {data.getMessage.comments.length ? (
+        <>
+          <h3>Checkout the Comments:</h3>
+          <ul>
+            {data.getMessage.comments.map(comment => (
+              <li key={comment.id}>
+                {comment.text}
+                <p>Posted by {comment.postedBy.name}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      <button
+        className="btn go-back--btn"
+        onClick={() => props.history.goBack()}
+      >
+        Go back
+      </button>
     </div>
   );
 };
