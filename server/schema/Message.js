@@ -6,14 +6,19 @@ export default gql`
     deleteAllMessages: SuccessMessage!
   }
   extend type Query {
-    getMessages: [Message!]!
+    getMessages(orderBy: MessageOrderByInput): [Message!]!
     getMessage(id: ID!): Message
   }
   type Message {
     id: ID!
     title: String!
     body: String!
+    createdAt: DateTime
     author: User!
     comments: [Comment]!
+  }
+  enum MessageOrderByInput {
+    createdAt_ASC
+    createdAt_DESC
   }
 `;

@@ -4,7 +4,7 @@ import Message from "./Message";
 import Comment from "./Comment";
 
 const linkSchema = gql`
-  scalar Date
+  scalar DateTime
   type Query {
     _: Boolean
   }

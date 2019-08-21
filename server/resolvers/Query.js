@@ -16,7 +16,9 @@ export default {
       return await context.prisma.users();
     },
     getMessages: async (parent, args, context) => {
-      return await context.prisma.messages();
+      return await context.prisma.messages({
+        orderBy: "createdAt_DESC"
+      });
     },
     getMessage: async (parent, { id }, context) => {
       return await context.prisma.message({ id });

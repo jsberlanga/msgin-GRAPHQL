@@ -245,12 +245,15 @@ input CommentWhereUniqueInput {
   id: ID
 }
 
+scalar DateTime
+
 scalar Long
 
 type Message {
   id: ID!
   title: String!
   body: String!
+  createdAt: DateTime!
   author: User!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
@@ -305,12 +308,15 @@ enum MessageOrderByInput {
   title_DESC
   body_ASC
   body_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type MessagePreviousValues {
   id: ID!
   title: String!
   body: String!
+  createdAt: DateTime!
 }
 
 input MessageScalarWhereInput {
@@ -356,6 +362,14 @@ input MessageScalarWhereInput {
   body_not_starts_with: String
   body_ends_with: String
   body_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   AND: [MessageScalarWhereInput!]
   OR: [MessageScalarWhereInput!]
   NOT: [MessageScalarWhereInput!]
@@ -491,6 +505,14 @@ input MessageWhereInput {
   body_not_starts_with: String
   body_ends_with: String
   body_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   author: UserWhereInput
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput
