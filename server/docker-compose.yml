@@ -16,7 +16,7 @@ services:
             host: host.docker.internal
             database: msgin
             schema: public
-            user: process.env.DB_USER
-            password: process.env.DB_PASS
+            user: juliosoto
+            password: juliosoto
             ssl: false
             port: '5432'
