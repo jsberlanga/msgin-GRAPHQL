@@ -22,7 +22,7 @@ const Header = props => {
       <div className="navbar__options">
         <Link to="/">Home</Link>
         <Link to="/add">Add New Message</Link>
-        <Link to="/messages">Messages</Link>
+        <Link to="/messages">News</Link>
       </div>
       <div className="navbar__auth">
         <Link to="/profile">Welcome {props.user.me.name}</Link>

@@ -7,7 +7,8 @@ import Signup from "../Signup";
 import Signin from "../Signin";
 import NotFound from "../NotFound";
 
-const UnauthenticatedApp = ({ user }) => {
+const UnauthenticatedApp = ({ user, loading }) => {
+  if (loading) return null;
   return (
     <>
       <Header user={user} />

@@ -7,18 +7,14 @@ const UnauthenticatedApp = React.lazy(() => import("./UnauthenticatedApp"));
 const AuthenticatedApp = React.lazy(() => import("./AuthenticatedApp"));
 
 const App = props => {
-  const { data } = useQuery(ME_QUERY);
+  const { data, loading } = useQuery(ME_QUERY);
   return !data.me ? (
-    <React.Suspense
-      fallback={<h1 className="container container__loading">Loading</h1>}
-    >
-      <UnauthenticatedApp user={data} />
+    <React.Suspense fallback={<div className="lds-dual-ring" />}>
+      <UnauthenticatedApp user={data} loading={loading} />
     </React.Suspense>
   ) : (
-    <React.Suspense
-      fallback={<h1 className="container container__loading">Loading</h1>}
-    >
-      <AuthenticatedApp user={data} />
+    <React.Suspense fallback={<div className="lds-dual-ring" />}>
+      <AuthenticatedApp user={data} loading={loading} />
     </React.Suspense>
   );
 };

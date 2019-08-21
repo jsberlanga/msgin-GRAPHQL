@@ -18,7 +18,7 @@ const Signout = props => {
 
   return (
     <>
-      {loading && <p>Loading...</p>}
+      {loading && <div className="lds-dual-ring" />}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <button

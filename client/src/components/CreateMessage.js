@@ -21,8 +21,7 @@ const CreateMessage = props => {
   const { refetch } = useQuery(GET_MESSAGES_QUERY);
   return (
     <>
-      <h1>Create a new message</h1>
-      {loading && <p>Loading...</p>}
+      {loading && <div className="lds-dual-ring" />}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <form
@@ -33,6 +32,8 @@ const CreateMessage = props => {
           props.history.push("/messages");
         }}
       >
+        <h1>Create a new message</h1>
+
         <label htmlFor="title">Title</label>
         <input
           id="title"

@@ -23,8 +23,7 @@ const Signin = props => {
   const { refetch } = useQuery(ME_QUERY);
   return (
     <>
-      <h1>Login to your account</h1>
-      {loading && <p>Loading...</p>}
+      {loading && <div className="lds-dual-ring" />}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <form
@@ -35,6 +34,8 @@ const Signin = props => {
           refetch();
         }}
       >
+        <h1>Login to your account</h1>
+
         <label htmlFor="sigin-email">Email</label>
         <input
           id="sigin-email"
@@ -49,7 +50,7 @@ const Signin = props => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <input type="submit" value="submit" />
+        <input type="submit" value="Login" />
       </form>
     </>
   );

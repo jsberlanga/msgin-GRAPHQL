@@ -23,12 +23,12 @@ const GET_MESSAGES_QUERY = gql`
 const MessageList = props => {
   const { data, error, loading } = useQuery(GET_MESSAGES_QUERY);
 
-  if (loading) return "Loading...";
+  if (loading) return <div className="lds-dual-ring" />;
   if (error) return `Error! `;
 
   return (
     <>
-      <h1>Messages</h1>
+      <h1>The Latest News</h1>
       <div className="message-list">
         {data &&
           data.getMessages.map(message => (

@@ -9,7 +9,9 @@ import SingleMessage from "../MessageList/SingleMessage";
 import Profile from "../Profile";
 import NotFound from "../NotFound";
 
-const AuthenticatedApp = ({ user }) => {
+const AuthenticatedApp = ({ user, loading }) => {
+  if (loading) return null;
+
   return (
     <>
       <Header user={user} />

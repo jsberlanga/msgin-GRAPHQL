@@ -33,7 +33,7 @@ const SingleMessage = props => {
   const { data, error, loading } = useQuery(GET_MESSAGE_QUERY, {
     variables: { id: props.match.params.id }
   });
-  if (loading) return <p>Loading</p>;
+  if (loading) return <div className="lds-dual-ring" />;
   if (error) return <Error>{JSON.stringify(error)}</Error>;
   if (!data.getMessage)
     return <Error>The queried message does not exist.</Error>;

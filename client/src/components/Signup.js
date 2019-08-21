@@ -26,8 +26,7 @@ const Signup = props => {
 
   return (
     <>
-      <h1>Register an account</h1>
-      {loading && <p>Loading...</p>}
+      {loading && <div className="lds-dual-ring" />}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <form
@@ -38,6 +37,8 @@ const Signup = props => {
           refetch();
         }}
       >
+        <h1>Register an account</h1>
+
         <label htmlFor="name">Name</label>
         <input id="name" type="text" onChange={e => setName(e.target.value)} />
         <label htmlFor="email">Email</label>
@@ -52,7 +53,7 @@ const Signup = props => {
           type="password"
           onChange={e => setPassword(e.target.value)}
         />
-        <input type="submit" value="submit" />
+        <input type="submit" value="Register" />
       </form>
     </>
   );
