@@ -4,7 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import { createServer } from "http";
-import { ApolloServer, PubSub } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
 import { prisma } from "./generated/prisma-client";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
@@ -37,6 +37,7 @@ const server = new ApolloServer({
   })
 });
 server.applyMiddleware({ app, path: "/__graphql", cors: false });
+server.subscriptionsPath = "/__graphql";
 
 // Subscriptions with Additional Middleware
 // More information: https://www.apollographql.com/docs/apollo-server/features/subscriptions/#subscriptions-with-additional-middleware
