@@ -21,18 +21,7 @@ app.use(cookieParser());
 app.use((req, res, next) => {
   const { token } = req.cookies;
   if (token) {
-    const { userId } = jwt.verify(
-      token,
-      process.env.JWT_SECRET,
-      (err, decoded) => {
-        if (err) {
-          if (err.name === "TokenExpiredError") {
-            throw Error("We are fucked");
-          }
-        }
-        return decoded;
-      }
-    );
+    const { userId } = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = userId;
   }
   next();
