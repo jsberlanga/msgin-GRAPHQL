@@ -20,6 +20,7 @@ type User {
 type Comment {
   id: ID! @id @unique
   text: String!
+  createdAt: DateTime! @createdAt
   message: Message! @relation(name: "CommentsOnMessage", onDelete: SET_NULL)
   postedBy: User! @relation(name: "CommentsByUser", onDelete: SET_NULL)
 }
