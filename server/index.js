@@ -37,7 +37,7 @@ const server = new ApolloServer({
   })
 });
 server.applyMiddleware({ app, path: "/__graphql", cors: false });
-server.subscriptionsPath = "/__graphql";
+// server.subscriptionsPath = "/__graphql";
 
 // Subscriptions with Additional Middleware
 // More information: https://www.apollographql.com/docs/apollo-server/features/subscriptions/#subscriptions-with-additional-middleware
