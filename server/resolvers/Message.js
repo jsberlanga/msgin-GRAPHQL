@@ -4,7 +4,9 @@ export default {
       return context.prisma.message({ id: parent.id }).author();
     },
     comments: (parent, args, context) => {
-      return context.prisma.message({ id: parent.id }).comments();
+      return context.prisma
+        .message({ id: parent.id })
+        .comments({ orderBy: "createdAt_DESC" });
     }
   }
 };

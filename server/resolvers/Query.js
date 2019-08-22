@@ -24,7 +24,9 @@ export default {
       return await context.prisma.message({ id });
     },
     getComments: async (parent, args, context) => {
-      return await context.prisma.comments();
+      return await context.prisma.comments({
+        orderBy: "createdAt_DESC"
+      });
     }
   }
 };

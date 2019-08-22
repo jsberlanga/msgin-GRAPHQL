@@ -22,6 +22,7 @@ type BatchPayload {
 type Comment {
   id: ID!
   text: String!
+  createdAt: DateTime!
   message: Message!
   postedBy: User!
 }
@@ -71,11 +72,14 @@ enum CommentOrderByInput {
   id_DESC
   text_ASC
   text_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type CommentPreviousValues {
   id: ID!
   text: String!
+  createdAt: DateTime!
 }
 
 input CommentScalarWhereInput {
@@ -107,6 +111,14 @@ input CommentScalarWhereInput {
   text_not_starts_with: String
   text_ends_with: String
   text_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   AND: [CommentScalarWhereInput!]
   OR: [CommentScalarWhereInput!]
   NOT: [CommentScalarWhereInput!]
@@ -234,6 +246,14 @@ input CommentWhereInput {
   text_not_starts_with: String
   text_ends_with: String
   text_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   message: MessageWhereInput
   postedBy: UserWhereInput
   AND: [CommentWhereInput!]
