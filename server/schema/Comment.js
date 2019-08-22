@@ -2,7 +2,10 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    getComments(orderBy: CommentOrderByInput): [Comment]!
+    getCommentsByMessage(
+      messageId: ID!
+      orderBy: CommentOrderByInput
+    ): [Comment]!
   }
   extend type Mutation {
     createComment(messageId: ID!, text: String!): Comment!

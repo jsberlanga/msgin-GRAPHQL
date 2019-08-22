@@ -23,10 +23,8 @@ export default {
     getMessage: async (parent, { id }, context) => {
       return await context.prisma.message({ id });
     },
-    getComments: async (parent, args, context) => {
-      return await context.prisma.comments({
-        orderBy: "createdAt_DESC"
-      });
+    getCommentsByMessage: async (parent, { messageId }, context) => {
+      return await context.prisma.message({ id: messageId }).comments();
     }
   }
 };
