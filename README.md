@@ -10,7 +10,7 @@ Features to implement:
 - Infinite Scroll / Pagination
 - Search, Filtering and Sorting
 - Profile
-- CreatedAt on message and comment
-- Real time subscriptions
-- Chat
++ CreatedAt on message and comment
++ Real time subscriptions
+! Chat
 ```

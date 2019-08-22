@@ -15,7 +15,7 @@ const CREATE_COMMENT_MUTATION = gql`
 
 const CreateComment = ({ messageId }) => {
   const [text, setText] = React.useState(commentTemplate);
-  const [createComment, { data, error, loading }] = useMutation(
+  const [createComment, { error, loading }] = useMutation(
     CREATE_COMMENT_MUTATION,
     {
       variables: { text, messageId }
@@ -24,24 +24,29 @@ const CreateComment = ({ messageId }) => {
   const { refetch } = useQuery(GET_MESSAGE_QUERY, {
     variables: { id: messageId }
   });
+  if (error) return `There was an error! Please try again`;
   return (
-    <form
-      onSubmit={async e => {
-        e.preventDefault();
-        await createComment();
-        setText("");
-        refetch();
-      }}
-    >
-      <label htmlFor="text-comment">New Comment</label>
-      <input
-        id="text-comment"
-        type="text"
-        value={text}
-        onChange={e => setText(e.target.value)}
-      />
-      <input type="submit" />
-    </form>
+    <>
+      <form
+        onSubmit={async e => {
+          e.preventDefault();
+          if (text) {
+            await createComment();
+            setText("");
+            refetch();
+          }
+        }}
+      >
+        <label htmlFor="text-comment">New Comment</label>
+        <input
+          id="text-comment"
+          type="text"
+          value={text}
+          onChange={e => setText(e.target.value)}
+        />
+        <input type="submit" value={loading ? "Sending" : "Send"} />
+      </form>
+    </>
   );
 };
 
