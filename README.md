@@ -13,4 +13,5 @@ Features to implement:
 + CreatedAt on message and comment
 + Real time subscriptions
 ! Chat
+- Optimistic UI
 ```
