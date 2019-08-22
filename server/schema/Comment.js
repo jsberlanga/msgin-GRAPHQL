@@ -7,6 +7,9 @@ export default gql`
   extend type Mutation {
     createComment(messageId: ID!, text: String!): Comment!
   }
+  extend type Subscription {
+    commentAdded(messageId: String!): Comment
+  }
   type Comment {
     id: ID!
     text: String!
