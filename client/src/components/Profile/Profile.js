@@ -8,7 +8,7 @@ const Profile = () => {
   const { data, refetch } = useQuery(ME_QUERY);
   React.useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
   return (
     <div className="profile--grid">
       <div>
