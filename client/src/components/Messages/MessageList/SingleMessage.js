@@ -2,10 +2,13 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { Helmet } from "react-helmet";
 
-import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 
 import Error from "../../globals/Error";
 import CreateComment from "../../Comments/CreateComment";
+import CommentsByMessage, {
+  NewCommentSubscription
+} from "../../Comments/CommentsByMessage";
 
 const GET_MESSAGE_QUERY = gql`
   query GET_MESSAGE_QUERY($id: ID!) {
@@ -31,29 +34,6 @@ const GET_MESSAGE_QUERY = gql`
   }
 `;
 
-const COMMENTS_SUBSCRIPTION = gql`
-  subscription commentAdded($messageId: String!) {
-    commentAdded(messageId: $messageId) {
-      id
-      text
-    }
-  }
-`;
-
-const NewCommentSubscription = ({ messageId }) => {
-  const { data, loading } = useSubscription(COMMENTS_SUBSCRIPTION, {
-    variables: { messageId }
-  });
-
-  return (
-    <p className={!loading && data.commentAdded ? "comment--notification" : ""}>
-      {!loading && data.commentAdded.text
-        ? `A new comment has been added`
-        : null}
-    </p>
-  );
-};
-
 const SingleMessage = props => {
   const { data, error, loading } = useQuery(GET_MESSAGE_QUERY, {
     variables: { id: props.match.params.id }
@@ -70,24 +50,19 @@ const SingleMessage = props => {
         <title>Message | {data.getMessage.title} </title>
         <meta name="description" content="Helmet application" />
       </Helmet>
-      <h1>{data.getMessage.title}</h1>
-      <p>{data.getMessage.body}</p>
-      <p>This message was written by {data.getMessage.author.name}</p>
+      <div className="message--single">
+        <h1 className="message--single__title">{data.getMessage.title}</h1>
+        <p className="message--single__body">{data.getMessage.body}</p>
+        <p className="message--single__author">
+          This message was written by {data.getMessage.author.name}
+        </p>
+      </div>
       <CreateComment messageId={data.getMessage.id} />
-      {data.getMessage.comments.length ? (
-        <>
-          <h3>Checkout the Comments:</h3>
-          <NewCommentSubscription messageId={props.match.params.id} />
-          <ul>
-            {data.getMessage.comments.map(comment => (
-              <li key={comment.id}>
-                {comment.text}
-                <p>Posted by {comment.postedBy.name}</p>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : null}
+      <>
+        <h3>Checkout the Comments:</h3>
+        <NewCommentSubscription messageId={props.match.params.id} />
+        <CommentsByMessage messageId={props.match.params.id} />
+      </>
       <button
         className="btn go-back--btn"
         onClick={() => props.history.goBack()}

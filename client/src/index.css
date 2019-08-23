@@ -143,6 +143,15 @@ li {
   grid-gap: 3rem;
 }
 
+.message--single__body {
+  font-size: 1.2rem;
+}
+
+.message--single__author {
+  color: silver;
+  text-align: right;
+}
+
 .message {
   background: rgb(248, 238, 240);
   min-height: 10rem;
@@ -161,6 +170,22 @@ li {
   color: #f1f1f1;
   margin: 0;
   padding: 2rem;
+}
+
+.comment {
+  max-width: 50rem;
+  background: #eeeeee;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.comment__text {
+}
+
+.comment__author {
+  text-align: right;
+  font-style: italic;
+  color: silver;
 }
 
 /* PROFILE */
