@@ -159,10 +159,10 @@ li {
 }
 
 .message {
-  background: rgb(248, 238, 240);
+  background: papayawhip;
   min-height: 10rem;
   padding: 2rem;
-  box-shadow: 1px 1px 2px rgb(230, 220, 223);
+  box-shadow: 3px 3px 1px goldenrod;
 }
 
 /* COMMENTS */
@@ -180,18 +180,19 @@ li {
 
 .comment {
   max-width: 50rem;
-  background: #eeeeee;
-  padding: 1rem;
+  background: #fafafa;
+  padding: 2rem;
   margin: 1rem 0;
+  box-shadow: 3px 3px 1px palevioletred;
 }
 
 .comment__text {
+  color: palevioletred;
 }
 
 .comment__author {
   text-align: right;
-  font-style: italic;
-  color: silver;
+  color: pink;
 }
 
 /* PROFILE */
