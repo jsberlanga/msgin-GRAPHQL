@@ -1,7 +1,8 @@
 import React from "react";
 import { gql } from "apollo-boost";
+import { Helmet } from "react-helmet";
 
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import Error from "../../globals/Error";
 import CreateComment from "../../Comments/CreateComment";
@@ -30,17 +31,45 @@ const GET_MESSAGE_QUERY = gql`
   }
 `;
 
+const COMMENTS_SUBSCRIPTION = gql`
+  subscription commentAdded($messageId: String!) {
+    commentAdded(messageId: $messageId) {
+      id
+      text
+    }
+  }
+`;
+
+const NewCommentSubscription = ({ messageId }) => {
+  const { data, loading } = useSubscription(COMMENTS_SUBSCRIPTION, {
+    variables: { messageId }
+  });
+
+  return (
+    <p className={!loading && data.commentAdded ? "comment--notification" : ""}>
+      {!loading && data.commentAdded.text
+        ? `A new comment has been added`
+        : null}
+    </p>
+  );
+};
+
 const SingleMessage = props => {
   const { data, error, loading } = useQuery(GET_MESSAGE_QUERY, {
     variables: { id: props.match.params.id }
   });
+
   if (loading) return <div className="lds-dual-ring" />;
   if (error) return <Error>{JSON.stringify(error)}</Error>;
   if (!data.getMessage)
     return <Error>The queried message does not exist.</Error>;
 
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>Message | {data.getMessage.title} </title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <h1>{data.getMessage.title}</h1>
       <p>{data.getMessage.body}</p>
       <p>This message was written by {data.getMessage.author.name}</p>
@@ -48,6 +77,7 @@ const SingleMessage = props => {
       {data.getMessage.comments.length ? (
         <>
           <h3>Checkout the Comments:</h3>
+          <NewCommentSubscription messageId={props.match.params.id} />
           <ul>
             {data.getMessage.comments.map(comment => (
               <li key={comment.id}>
@@ -64,7 +94,7 @@ const SingleMessage = props => {
       >
         Go back
       </button>
-    </div>
+    </>
   );
 };
 
