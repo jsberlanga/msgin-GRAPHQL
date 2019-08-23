@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/react-hooks";
 import Error from "../../globals/Error";
 import CreateComment from "../../Comments/CreateComment";
 import CommentsByMessage, {
-  NewCommentSubscription
+  NewCommentPopup
 } from "../../Comments/CommentsByMessage";
 
 const GET_MESSAGE_QUERY = gql`
@@ -60,8 +60,8 @@ const SingleMessage = props => {
       <CreateComment messageId={data.getMessage.id} />
       <>
         <h3>Checkout the Comments:</h3>
-        <NewCommentSubscription messageId={props.match.params.id} />
         <CommentsByMessage messageId={props.match.params.id} />
+        <NewCommentPopup messageId={props.match.params.id} />
       </>
       <button
         className="btn go-back--btn"
