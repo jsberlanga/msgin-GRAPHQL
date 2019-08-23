@@ -29,6 +29,7 @@ const GET_COMMENTS_QUERY = gql`
 `;
 
 const CommentsByMessage = ({ messageId }) => {
+  // subscribeToMore is a function available on every query result in React Apollo. It works just like  fetchMore, except that the update function gets called every time the subscription returns, instead of only once.
   const { subscribeToMore, ...result } = useQuery(GET_COMMENTS_QUERY, {
     variables: { messageId }
   });
@@ -36,21 +37,22 @@ const CommentsByMessage = ({ messageId }) => {
     <>
       <CommentsPage
         {...result}
+        // Add a function called subscribeToNewComments that will subscribe using subscribeToMore and update the query's store with the new data using updateQuery.
         subscribeToNewComments={() =>
           subscribeToMore({
             document: NEW_COMMENTS_SUBSCRIPTION,
             variables: { messageId },
+            // the updateQuery callback must return an object of the same shape as the initial query data, otherwise the new data won't be merged. Here the new comment is pushed in the comments list of the entry.
             updateQuery: (prev, { subscriptionData }) => {
               if (!subscriptionData.data) return prev;
               const newFeedItem = subscriptionData.data.commentAdded;
-              const obj = Object.assign({}, prev, {
+              const newObjData = Object.assign({}, prev, {
                 getCommentsByMessage: [
                   ...prev.getCommentsByMessage,
                   newFeedItem
                 ]
               });
-              // console.log(obj);
-              return obj;
+              return newObjData;
             }
           })
         }
@@ -63,7 +65,7 @@ const CommentsPage = props => {
   React.useEffect(() => {
     props.subscribeToNewComments();
   }, []);
-  if (props.loading) return <p>loading</p>;
+  if (props.loading) return <div className="lds-dual-ring" />;
   return (
     <ul>
       {props.data.getCommentsByMessage.map(comment => (
