@@ -27,6 +27,7 @@ const CreateMessage = props => {
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <form
+        className="form"
         onSubmit={async e => {
           e.preventDefault();
           await createMessage({ variables: { title, body } });
@@ -36,7 +37,9 @@ const CreateMessage = props => {
       >
         <h1>Publish a Message</h1>
 
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">
+          <h5>Message</h5>
+        </label>
         <input
           id="title"
           type="text"
@@ -44,7 +47,9 @@ const CreateMessage = props => {
           onChange={e => setTitle(e.target.value)}
         />
 
-        <label htmlFor="body">Body</label>
+        <label htmlFor="body">
+          <h5>Body</h5>
+        </label>
         <textarea
           id="body"
           type="text"

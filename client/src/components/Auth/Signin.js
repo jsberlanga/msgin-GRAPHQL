@@ -36,14 +36,18 @@ const Signin = props => {
       >
         <h1>Login to your account</h1>
 
-        <label htmlFor="sigin-email">Email</label>
+        <label htmlFor="sigin-email">
+          <h5>Email</h5>
+        </label>
         <input
           id="sigin-email"
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <label htmlFor="signin-password">Password</label>
+        <label htmlFor="signin-password">
+          <h5>Password</h5>
+        </label>
         <input
           id="signin-password"
           type="password"

@@ -49,14 +49,15 @@ h5 {
 }
 
 button,
-a,
-input[type="submit"] {
+a {
   font-family: "Roboto", sans-serif;
   cursor: pointer;
 }
 
 input[type="submit"] {
+  font-family: "Poppins";
   margin-top: 2rem;
+  cursor: pointer;
 }
 
 form {
@@ -64,7 +65,7 @@ form {
   padding: 2rem;
   display: grid;
   width: 30rem;
-  filter: drop-shadow(1px 1px 1px pink);
+  box-shadow: 6px 6px 1px pink;
 }
 
 input,
@@ -74,11 +75,10 @@ textarea {
   background: #f1f1f1;
   font-size: 1rem;
   color: #424242;
-  font-style: italic;
 }
 
 label {
-  margin: 1rem 0 0.4rem;
+  color: silver;
 }
 
 button,
@@ -86,7 +86,7 @@ input[type="submit"] {
   border: none;
   background: palevioletred;
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 0.7rem;
 }
 

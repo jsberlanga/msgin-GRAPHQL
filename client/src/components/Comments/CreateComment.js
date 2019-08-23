@@ -28,6 +28,7 @@ const CreateComment = ({ messageId }) => {
   return (
     <>
       <form
+        className="form"
         onSubmit={async e => {
           e.preventDefault();
           if (text) {
@@ -37,7 +38,9 @@ const CreateComment = ({ messageId }) => {
           }
         }}
       >
-        <label htmlFor="text-comment">New Comment</label>
+        <label htmlFor="text-comment">
+          <h1>New Comment</h1>
+        </label>
         <input
           id="text-comment"
           type="text"

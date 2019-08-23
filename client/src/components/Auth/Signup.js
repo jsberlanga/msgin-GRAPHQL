@@ -39,15 +39,21 @@ const Signup = props => {
       >
         <h1>Register an account</h1>
 
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">
+          <h5>Name</h5>
+        </label>
         <input id="name" type="text" onChange={e => setName(e.target.value)} />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">
+          <h5>Email</h5>
+        </label>
         <input
           id="email"
           type="email"
           onChange={e => setEmail(e.target.value)}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">
+          <h5>Password</h5>
+        </label>
         <input
           id="password"
           type="password"
