@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 
-import { ME_QUERY } from "../../context/UserContext";
+import { ME_QUERY } from "../../../context/UserContext";
 
 const Profile = () => {
   const { data, refetch } = useQuery(ME_QUERY);

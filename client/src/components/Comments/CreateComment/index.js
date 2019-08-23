@@ -2,7 +2,7 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
-import { GET_MESSAGE_QUERY } from "../Messages/MessageList/SingleMessage";
+import { GET_MESSAGE_QUERY } from "../../Messages/MessageList/SingleMessage";
 
 const CREATE_COMMENT_MUTATION = gql`
   mutation CREATE_COMMENT_MUTATION($text: String!, $messageId: ID!) {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
-import { GET_MESSAGES_QUERY } from "./MessageList/MessageList";
+import { GET_MESSAGES_QUERY } from "../MessageList/MessageList";
 
 const CREATE_MESSAGE_MUTATION = gql`
   mutation createMessage($title: String!, $body: String!) {

@@ -6,7 +6,7 @@ import Home from "../Home";
 import CreateMessage from "../Messages/CreateMessage";
 import MessageList from "../Messages/MessageList/MessageList";
 import SingleMessage from "../Messages/MessageList/SingleMessage";
-import Profile from "../Profile/Profile";
+import Profile from "../User/Profile";
 import NotFound from "../NotFound";
 
 const AuthenticatedApp = ({ user, loading }) => {
