@@ -135,6 +135,12 @@ li {
   font-size: 5rem;
 }
 
+/* HOME */
+
+.home--image {
+  max-width: 70rem;
+}
+
 /* MESSAGES */
 
 .message-list {
