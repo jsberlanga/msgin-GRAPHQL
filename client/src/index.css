@@ -124,6 +124,7 @@ li {
 
 .container {
   max-width: 70rem;
+  min-height: 60vh;
   margin: 0 auto;
 }
 
@@ -261,4 +262,19 @@ li {
   margin-top: 3rem;
   padding: 1rem 3rem;
   background: dimgrey;
+}
+
+#footer {
+  position: relative;
+  margin-top: 10rem;
+  height: 7rem;
+  background: palevioletred;
+}
+
+.footer--title {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  font-size: 1.1rem;
+  color: #fff;
 }
