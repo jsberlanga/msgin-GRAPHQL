@@ -144,10 +144,25 @@ li {
 
 /* MESSAGES */
 
-.message-list {
+.messagelist__container {
+  position: relative;
+}
+
+.messagelist {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 3rem;
+}
+
+.messagelist__more {
+  background: #eae9e9;
+  color: #420000;
+  position: absolute;
+  padding: 1rem;
+  bottom: -7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 3px 3px 1px #d4d7dd;
 }
 
 .message--single__body {
