@@ -69,7 +69,7 @@ const CommentsPage = props => {
   return (
     <ul>
       {props.data.getCommentsByMessage.map(comment => (
-        <li className="comment" key={comment.id}>
+        <li id={comment.id} className="comment" key={comment.id}>
           <p className="comment__text">{comment.text}</p>
           <p className="comment__author">Posted by {comment.postedBy.name}</p>
         </li>
@@ -98,10 +98,16 @@ const NewCommentPopup = ({ messageId }) => {
     >
       <button onClick={() => setOpen(false)}>x</button>
       {!loading && data.commentAdded.text && (
-        <>
+        <div
+          onClick={() => {
+            const comment = document.getElementById(data.commentAdded.id);
+            if (comment) comment.scrollIntoView();
+            setOpen(false);
+          }}
+        >
           <h4>New comment:</h4>
-          <p>{short(data.commentAdded.text)}</p>
-        </>
+          <p>{short(data.commentAdded.text)} </p>
+        </div>
       )}
     </div>
   );
