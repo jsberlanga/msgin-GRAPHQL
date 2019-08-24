@@ -79,16 +79,31 @@ const CommentsPage = props => {
 };
 
 const NewCommentPopup = ({ messageId }) => {
+  const [open, setOpen] = React.useState(false);
   const { data, loading } = useSubscription(NEW_COMMENTS_SUBSCRIPTION, {
     variables: { messageId }
   });
 
+  React.useEffect(() => {
+    setOpen(true);
+  }, [data, loading]);
+
   return (
-    <p className={!loading && data.commentAdded ? "comment--notification" : ""}>
-      {!loading && data.commentAdded.text
-        ? `NEW COMMENT: ${short(data.commentAdded.text)}`
-        : null}
-    </p>
+    <div
+      className={
+        !loading && data && open
+          ? "comment--notification__open"
+          : "comment--notification__closed"
+      }
+    >
+      <button onClick={() => setOpen(false)}>x</button>
+      {!loading && data.commentAdded.text && (
+        <>
+          <h4>New comment:</h4>
+          <p>{short(data.commentAdded.text)}</p>
+        </>
+      )}
+    </div>
   );
 };
 
