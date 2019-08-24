@@ -6,7 +6,11 @@ export default gql`
     deleteAllMessages: SuccessMessage!
   }
   extend type Query {
-    getMessages(orderBy: MessageOrderByInput): [Message!]!
+    getMessages(
+      orderBy: MessageOrderByInput
+      skip: Int
+      first: Int
+    ): [Message!]!
     getMessage(id: ID!): Message
   }
   type Message {

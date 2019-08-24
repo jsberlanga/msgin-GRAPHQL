@@ -15,9 +15,11 @@ export default {
     getUsers: async (parent, args, context) => {
       return await context.prisma.users();
     },
-    getMessages: async (parent, args, context) => {
+    getMessages: async (parent, { skip, first }, context) => {
       return await context.prisma.messages({
-        orderBy: "createdAt_DESC"
+        orderBy: "createdAt_DESC",
+        skip,
+        first
       });
     },
     getMessage: async (parent, { id }, context) => {
