@@ -11,7 +11,7 @@ Features to implement:
 - Search, Filtering and Sorting
 - Profile
 + CreatedAt on message and comment
-+ Real time subscriptions
++ Real time subscriptions when adding comment
 ! Chat
 - Optimistic UI
 ```
