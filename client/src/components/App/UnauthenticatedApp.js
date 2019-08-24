@@ -1,7 +1,9 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Header from "../globals/Header/index";
+import Header from "../globals/Header";
+import Footer from "../globals/Footer";
+
 import Home from "../Home";
 import Signup from "../Auth/Signup";
 import Signin from "../Auth/Signin";
@@ -20,6 +22,7 @@ const UnauthenticatedApp = ({ user, loading }) => {
           <Route path="/" component={NotFound} />
         </Switch>
       </div>
+      <Footer />
     </>
   );
 };
