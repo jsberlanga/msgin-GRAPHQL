@@ -39,7 +39,7 @@ const SingleMessage = props => {
     variables: { id: props.match.params.id }
   });
 
-  if (loading) return <div className="lds-dual-ring" />;
+  if (loading) return <div data-testid="loading" className="lds-dual-ring" />;
   if (error) return <Error>{JSON.stringify(error)}</Error>;
   if (!data.getMessage)
     return <Error>The queried message does not exist.</Error>;

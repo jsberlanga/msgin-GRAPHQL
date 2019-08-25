@@ -4,20 +4,20 @@ import Helpers from "../../../lib/utils/helpers";
 
 const Message = ({ message }) => {
   return (
-    <div className="message">
-      <h3>{message.title}</h3>
-      <p>{Helpers.shortenText(message.body, 300)}</p>
-      <p>
-        {message.comments.length
-          ? message.comments.length > 1
-            ? `This message have ${message.comments.length} comments`
-            : `This message has ${message.comments.length} comment`
-          : null}
-      </p>
+    <div data-testid="message" className="message">
+      <h3 data-testid="message-title">{message.title}</h3>
+      <p data-testid="message-body">{Helpers.shortenText(message.body, 300)}</p>
       <p className="message__created">
         This message was written {Helpers.formatDate(message.createdAt)} by{" "}
         {message.author.name}
       </p>
+      {message.comments.length ? (
+        <p className="message__comments" data-testid="message-comments">
+          {message.comments.length > 1
+            ? `There are ${message.comments.length} comments`
+            : `There is ${message.comments.length} comment`}
+        </p>
+      ) : null}
       <p className="message__more">
         <Link to={`/message/${message.id}`}>know more</Link>
       </p>

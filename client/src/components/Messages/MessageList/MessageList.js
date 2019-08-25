@@ -30,13 +30,13 @@ const MessageList = props => {
     },
     fetchPolicy: "cache-and-network"
   });
-  if (loading) return <div className="lds-dual-ring" />;
+  if (loading) return <div data-testid="loading" className="lds-dual-ring" />;
   if (error) return `There was an error.`;
   return (
     <>
       <h1>The Latest Messages</h1>
       <div className="messagelist__container">
-        <div className="messagelist">
+        <div data-testid="messagelist" className="messagelist">
           {data &&
             data.getMessages.map(message => (
               <Message key={message.id} message={message} />

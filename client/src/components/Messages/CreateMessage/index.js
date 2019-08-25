@@ -23,7 +23,7 @@ const CreateMessage = props => {
   const { refetch } = useQuery(GET_MESSAGES_QUERY);
   return (
     <>
-      {loading && <div className="lds-dual-ring" />}
+      {loading && <div data-testid="loading" className="lds-dual-ring" />}
       {error &&
         error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <form
