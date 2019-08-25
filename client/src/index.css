@@ -186,6 +186,13 @@ li {
 .message__created {
   color: silver;
   font-style: italic;
+  font-size: 1.2rem;
+}
+
+.message__comments {
+  margin-top: 5rem;
+  /* font-style: italic; */
+  text-align: right;
 }
 
 .message__more {
