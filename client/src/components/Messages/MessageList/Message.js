@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Helpers from "../../../lib/utils/helpers";
 
 const Message = ({ message }) => {
   return (
@@ -14,7 +15,8 @@ const Message = ({ message }) => {
             : `This message has ${message.comments.length} comment`
           : null}
       </p>
-      <Link to={`/message/${message.id}`}>More</Link>
+      <p>This message was written {Helpers.formatDate(message.createdAt)}</p>
+      <Link to={`/message/${message.id}`}>read more and comment</Link>
     </div>
   );
 };

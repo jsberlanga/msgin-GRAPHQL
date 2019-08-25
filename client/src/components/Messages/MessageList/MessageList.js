@@ -10,6 +10,7 @@ const GET_MESSAGES_QUERY = gql`
       id
       title
       body
+      createdAt
       author {
         id
         name
