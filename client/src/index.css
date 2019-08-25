@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Playfair Display";
   letter-spacing: 0.5px;
   color: darkslategrey;
   background: #fffefe;
@@ -49,15 +49,14 @@ h5 {
 }
 
 button,
-a {
-  font-family: "Roboto", sans-serif;
+a,
+input[type="submit"] {
+  font-family: "Poppins";
   cursor: pointer;
 }
 
 input[type="submit"] {
-  font-family: "Poppins";
   margin-top: 2rem;
-  cursor: pointer;
 }
 
 form {
@@ -104,7 +103,8 @@ li {
 
 .navbar * {
   padding: 1rem;
-  font-size: 1rem;
+  font-family: "Roboto";
+  font-size: 1.1rem;
   text-decoration: none;
 }
 
@@ -175,10 +175,27 @@ li {
 }
 
 .message {
+  position: relative;
   background: papayawhip;
   min-height: 10rem;
   padding: 2rem;
   box-shadow: 3px 3px 1px goldenrod;
+  padding-bottom: 5rem;
+}
+
+.message__created {
+  color: silver;
+  font-style: italic;
+}
+
+.message__more {
+  color: pink !important;
+  text-decoration: none;
+  font-size: 2rem;
+  text-align: right;
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
 }
 
 /* COMMENTS */

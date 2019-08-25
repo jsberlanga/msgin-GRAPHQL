@@ -7,7 +7,6 @@ const Message = ({ message }) => {
     <div className="message">
       <h3>{message.title}</h3>
       <p>{message.body}</p>
-      <p>Written by: {message.author.name}</p>
       <p>
         {message.comments.length
           ? message.comments.length > 1
@@ -15,8 +14,13 @@ const Message = ({ message }) => {
             : `This message has ${message.comments.length} comment`
           : null}
       </p>
-      <p>This message was written {Helpers.formatDate(message.createdAt)}</p>
-      <Link to={`/message/${message.id}`}>read more and comment</Link>
+      <p className="message__created">
+        This message was written {Helpers.formatDate(message.createdAt)} by{" "}
+        {message.author.name}
+      </p>
+      <p className="message__more">
+        <Link to={`/message/${message.id}`}>know more</Link>
+      </p>
     </div>
   );
 };
