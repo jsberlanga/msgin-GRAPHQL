@@ -2,6 +2,7 @@ import React from "react";
 import { gql } from "apollo-boost";
 
 import { useQuery, useSubscription } from "@apollo/react-hooks";
+import Helpers from "../../lib/utils/helpers";
 
 const NEW_COMMENTS_SUBSCRIPTION = gql`
   subscription commentAdded($messageId: String!) {
@@ -106,16 +107,12 @@ const NewCommentPopup = ({ messageId }) => {
           }}
         >
           <h4>New comment:</h4>
-          <p>{short(data.commentAdded.text)} </p>
+          <p>{Helpers.shortenText(data.commentAdded.text, 20)} </p>
         </div>
       )}
     </div>
   );
 };
-
-function short(string) {
-  return string.length > 20 ? `${string.slice(0, 20).trim()}...` : string;
-}
 
 export default CommentsByMessage;
 export { NewCommentPopup };

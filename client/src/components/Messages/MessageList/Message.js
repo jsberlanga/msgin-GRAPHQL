@@ -6,7 +6,7 @@ const Message = ({ message }) => {
   return (
     <div className="message">
       <h3>{message.title}</h3>
-      <p>{message.body}</p>
+      <p>{Helpers.shortenText(message.body, 300)}</p>
       <p>
         {message.comments.length
           ? message.comments.length > 1

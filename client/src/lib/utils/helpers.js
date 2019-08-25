@@ -24,4 +24,10 @@ export default class Helpers {
 
     return date;
   };
+
+  static shortenText = (string, chars) => {
+    return string.length > chars
+      ? `${string.slice(0, chars).trim()}...`
+      : string;
+  };
 }
