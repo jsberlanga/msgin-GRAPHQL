@@ -57,11 +57,11 @@ const SingleMessage = props => {
           This message was written by {data.getMessage.author.name}
         </p>
       </div>
-      <CreateComment messageId={data.getMessage.id} />
       <>
         <h3>Checkout the Comments:</h3>
         <CommentsByMessage messageId={props.match.params.id} />
         <NewCommentPopup messageId={props.match.params.id} />
+        <CreateComment messageId={data.getMessage.id} />
       </>
       <button
         className="btn go-back--btn"
