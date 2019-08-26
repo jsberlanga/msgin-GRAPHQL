@@ -10,11 +10,9 @@ import SingleMessage from "../Messages/MessageList/SingleMessage";
 import Profile from "../User/Profile";
 import NotFound from "../NotFound";
 
-const AuthenticatedApp = ({ user, loading }) => {
-  if (loading) return null;
-
+const AuthenticatedApp = ({ user }) => {
   return (
-    <>
+    <div data-testid="authenticated-app">
       <Header user={user} />
       <div className="container">
         <Switch>
@@ -27,7 +25,7 @@ const AuthenticatedApp = ({ user, loading }) => {
         </Switch>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

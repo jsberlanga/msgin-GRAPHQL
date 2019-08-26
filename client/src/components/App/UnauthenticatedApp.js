@@ -9,10 +9,9 @@ import Signup from "../Auth/Signup";
 import Signin from "../Auth/Signin";
 import NotFound from "../NotFound";
 
-const UnauthenticatedApp = ({ user, loading }) => {
-  if (loading) return null;
+const UnauthenticatedApp = ({ user }) => {
   return (
-    <>
+    <div data-testid="unauthenticated-app">
       <Header user={user} />
       <div className="container">
         <Switch>
@@ -23,7 +22,7 @@ const UnauthenticatedApp = ({ user, loading }) => {
         </Switch>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

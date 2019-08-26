@@ -1,4 +1,5 @@
 import { GET_MESSAGES_QUERY } from "../components/Messages/MessageList/MessageList";
+import { ME_QUERY } from "../context/UserContext";
 
 export const GET_MESSAGES_MOCK = [
   {
@@ -29,6 +30,38 @@ export const GET_MESSAGES_MOCK = [
             comments: [],
           },
         ],
+      },
+    },
+  },
+];
+
+export const ME_MOCK = [
+  {
+    request: {
+      query: ME_QUERY,
+    },
+    result: {
+      data: {
+        me: {
+          id: 1,
+          name: "testname",
+          email: "testemail",
+          messages: [],
+          comments: [],
+        },
+      },
+    },
+  },
+];
+
+export const NOT_ME_MOCK = [
+  {
+    request: {
+      query: ME_QUERY,
+    },
+    result: {
+      data: {
+        me: null,
       },
     },
   },
