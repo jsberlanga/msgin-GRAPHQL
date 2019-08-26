@@ -15,23 +15,21 @@ const CREATE_MESSAGE_MUTATION = gql`
 `;
 
 const CreateMessage = props => {
-  const [title, setTitle] = useState(titleTemplate);
-  const [body, setBody] = useState(bodyTemplate);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [createMessage, { error, loading }] = useMutation(
     CREATE_MESSAGE_MUTATION
   );
-  const { refetch } = useQuery(GET_MESSAGES_QUERY);
   return (
     <>
       {loading && <div data-testid="loading" className="lds-dual-ring" />}
-      {error &&
-        error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
+      {error && <p key="somekey">{JSON.stringify(error.message)}</p>}
       <form
+        data-testid="createmessage-form"
         className="form"
         onSubmit={async e => {
           e.preventDefault();
           await createMessage({ variables: { title, body } });
-          await refetch();
           props.history.push("/messages");
         }}
       >
@@ -41,6 +39,7 @@ const CreateMessage = props => {
           <h5>Message</h5>
         </label>
         <input
+          data-testid="message-title"
           id="title"
           type="text"
           value={title}
@@ -51,6 +50,7 @@ const CreateMessage = props => {
           <h5>Body</h5>
         </label>
         <textarea
+          data-testid="message-body"
           id="body"
           type="text"
           value={body}
@@ -58,15 +58,16 @@ const CreateMessage = props => {
           rows="7"
         />
 
-        <input type="submit" value="Publish" />
+        <input type="submit" value="Publish" data-testid="message-submit" />
       </form>
     </>
   );
 };
 
-const bodyTemplate =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+// const bodyTemplate =
+//   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-const titleTemplate = "Lorem ipsum";
+// const titleTemplate = "Lorem ipsum";
 
 export default CreateMessage;
+export { CREATE_MESSAGE_MUTATION };

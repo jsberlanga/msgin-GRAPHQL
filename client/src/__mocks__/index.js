@@ -1,5 +1,6 @@
 import { GET_MESSAGES_QUERY } from "../components/Messages/MessageList/MessageList";
 import { ME_QUERY } from "../context/UserContext";
+import { CREATE_MESSAGE_MUTATION } from "../components/Messages/CreateMessage";
 
 export const GET_MESSAGES_MOCK = [
   {
@@ -62,6 +63,46 @@ export const NOT_ME_MOCK = [
     result: {
       data: {
         me: null,
+      },
+    },
+  },
+];
+
+const createMessage = { id: 1, title: "testtitle", body: "testbody" };
+
+export const CREATE_MESSAGE_MOCK = [
+  {
+    request: {
+      query: CREATE_MESSAGE_MUTATION,
+      variables: {
+        title: "testtitle",
+        body: "testbody",
+      },
+    },
+    result: {
+      data: { createMessage },
+    },
+  },
+  {
+    request: {
+      query: GET_MESSAGES_QUERY,
+      variables: {
+        skip: 0,
+        first: 4,
+      },
+    },
+    result: {
+      data: {
+        getMessages: [
+          {
+            id: "1",
+            title: "testtitle",
+            body: "testbody",
+            createdAt: new Date(),
+            author: { id: 1, name: "Author 1" },
+            comments: [],
+          },
+        ],
       },
     },
   },

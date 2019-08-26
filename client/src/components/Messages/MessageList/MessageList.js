@@ -31,7 +31,7 @@ const MessageList = props => {
     fetchPolicy: "cache-and-network",
   });
   if (loading) return <div data-testid="loading" className="lds-dual-ring" />;
-  if (error) return `There was an error.`;
+  if (error) return <p>{error.message}</p>;
   return (
     <>
       <h1>The Latest Messages</h1>
