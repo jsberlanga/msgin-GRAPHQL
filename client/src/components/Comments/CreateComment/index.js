@@ -21,9 +21,7 @@ const CreateComment = ({ messageId }) => {
       variables: { text, messageId },
     }
   );
-  const { refetch } = useQuery(GET_MESSAGE_QUERY, {
-    variables: { id: messageId },
-  });
+
   if (error) return `There was an error! Please try again`;
   return (
     <>
@@ -34,7 +32,6 @@ const CreateComment = ({ messageId }) => {
           if (text) {
             await createComment();
             setText("");
-            refetch();
           }
         }}
       >

@@ -65,7 +65,7 @@ const CommentsByMessage = ({ messageId }) => {
 const CommentsPage = props => {
   React.useEffect(() => {
     props.subscribeToNewComments();
-  }, [props]);
+  }, []);
   if (props.loading)
     return <div data-testid="loading" className="lds-dual-ring" />;
   return (
