@@ -18,11 +18,11 @@ const CreateComment = ({ messageId }) => {
   const [createComment, { error, loading }] = useMutation(
     CREATE_COMMENT_MUTATION,
     {
-      variables: { text, messageId }
+      variables: { text, messageId },
     }
   );
   const { refetch } = useQuery(GET_MESSAGE_QUERY, {
-    variables: { id: messageId }
+    variables: { id: messageId },
   });
   if (error) return `There was an error! Please try again`;
   return (

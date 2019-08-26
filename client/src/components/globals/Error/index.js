@@ -5,7 +5,7 @@ const styles = {
   backgroundColor: "#fff",
   padding: "1rem",
   fontSize: "2rem",
-  border: "3px solid red"
+  border: "3px solid red",
 };
 
 const Error = props => {

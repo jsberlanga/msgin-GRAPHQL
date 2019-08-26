@@ -26,9 +26,9 @@ const MessageList = props => {
   const { data, error, loading, fetchMore } = useQuery(GET_MESSAGES_QUERY, {
     variables: {
       skip: 0,
-      first: 4
+      first: 4,
     },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
   if (loading) return <div data-testid="loading" className="lds-dual-ring" />;
   if (error) return `There was an error.`;
@@ -47,18 +47,18 @@ const MessageList = props => {
           onClick={() => {
             fetchMore({
               variables: {
-                skip: data.getMessages.length
+                skip: data.getMessages.length,
               },
               updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult) return prev;
                 const obj = Object.assign({}, prev, {
                   getMessages: [
                     ...prev.getMessages,
-                    ...fetchMoreResult.getMessages
-                  ]
+                    ...fetchMoreResult.getMessages,
+                  ],
                 });
                 return obj;
-              }
+              },
             });
           }}
         >
