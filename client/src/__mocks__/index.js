@@ -6,8 +6,8 @@ export const GET_MESSAGES_MOCK = [
       query: GET_MESSAGES_QUERY,
       variables: {
         skip: 0,
-        first: 4
-      }
+        first: 4,
+      },
     },
     result: {
       data: {
@@ -18,7 +18,7 @@ export const GET_MESSAGES_MOCK = [
             body: "Body 1",
             createdAt: new Date(),
             author: { id: 1, name: "Author 1" },
-            comments: [{ id: 1 }]
+            comments: [{ id: 1 }],
           },
           {
             id: "2",
@@ -26,10 +26,10 @@ export const GET_MESSAGES_MOCK = [
             body: "Body 2",
             createdAt: new Date(),
             author: { id: 1, name: "Author 1" },
-            comments: []
-          }
-        ]
-      }
-    }
-  }
+            comments: [],
+          },
+        ],
+      },
+    },
+  },
 ];

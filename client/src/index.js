@@ -17,14 +17,14 @@ import { getMainDefinition } from "apollo-utilities";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/__graphql",
-  credentials: "include"
+  credentials: "include",
 });
 
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000/graphql`,
   options: {
-    reconnect: true
-  }
+    reconnect: true,
+  },
 });
 
 const link = split(
@@ -50,9 +50,9 @@ const client = new ApolloClient({
         );
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
-    link
+    link,
   ]),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(

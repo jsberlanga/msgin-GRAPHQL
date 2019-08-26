@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/react-hooks";
 import Error from "../../globals/Error";
 import CreateComment from "../../Comments/CreateComment";
 import CommentsByMessage, {
-  NewCommentPopup
+  NewCommentPopup,
 } from "../../Comments/CommentsByMessage";
 
 const GET_MESSAGE_QUERY = gql`
@@ -36,7 +36,7 @@ const GET_MESSAGE_QUERY = gql`
 
 const SingleMessage = props => {
   const { data, error, loading } = useQuery(GET_MESSAGE_QUERY, {
-    variables: { id: props.match.params.id }
+    variables: { id: props.match.params.id },
   });
 
   if (loading) return <div data-testid="loading" className="lds-dual-ring" />;
