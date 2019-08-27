@@ -126,7 +126,7 @@ li {
 /* HERO CONTAINER */
 
 .container {
-  max-width: 70rem;
+  max-width: 80rem;
   min-height: 60vh;
   margin: 0 auto;
 }
@@ -141,8 +141,27 @@ li {
 
 /* HOME */
 
+/* .home--image {
+  max-width: 80rem;
+} */
+
 .home--image {
-  max-width: 70rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.home--image__main--image {
+  max-width: 60rem;
+}
+
+.home--image__rest--container {
+  align-self: flex-end;
+}
+
+.home--image__rest--image {
+  width: 20rem;
 }
 
 /* MESSAGES */
