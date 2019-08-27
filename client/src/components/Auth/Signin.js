@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import useForm from "../../lib/hooks/useForm";
 
 import { ME_QUERY } from "../../context/UserContext";
 
@@ -17,8 +18,12 @@ const SIGNIN_MUTATION = gql`
 `;
 
 const Signin = props => {
-  const [email, setEmail] = useState("test@test.com");
-  const [password, setPassword] = useState("123qwe");
+  const { values, handleChange } = useForm({
+    email: "",
+    password: "",
+  });
+  const { email, password } = values;
+
   const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION);
   const { refetch } = useQuery(ME_QUERY);
   return (
@@ -43,7 +48,8 @@ const Signin = props => {
           id="sigin-email"
           type="email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          name="email"
+          onChange={handleChange}
         />
         <label htmlFor="signin-password">
           <h5>Password</h5>
@@ -52,7 +58,8 @@ const Signin = props => {
           id="signin-password"
           type="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          name="password"
+          onChange={handleChange}
         />
         <input type="submit" value="Login" />
       </form>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import useForm from "../../lib/hooks/useForm";
 
 import { ME_QUERY } from "../../context/UserContext";
 
@@ -17,9 +18,13 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const Signup = props => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { values, handleChange } = useForm({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email, password } = values;
+
   const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION);
 
   const { refetch } = useQuery(ME_QUERY);
@@ -42,23 +47,15 @@ const Signup = props => {
         <label htmlFor="name">
           <h5>Name</h5>
         </label>
-        <input id="name" type="text" onChange={e => setName(e.target.value)} />
+        <input id="name" type="text" onChange={handleChange} />
         <label htmlFor="email">
           <h5>Email</h5>
         </label>
-        <input
-          id="email"
-          type="email"
-          onChange={e => setEmail(e.target.value)}
-        />
+        <input id="email" type="email" onChange={handleChange} />
         <label htmlFor="password">
           <h5>Password</h5>
         </label>
-        <input
-          id="password"
-          type="password"
-          onChange={e => setPassword(e.target.value)}
-        />
+        <input id="password" type="password" onChange={handleChange} />
         <input type="submit" value="Register" />
       </form>
     </>

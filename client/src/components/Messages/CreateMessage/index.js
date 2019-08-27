@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { gql } from "apollo-boost";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-
-import { GET_MESSAGES_QUERY } from "../MessageList/MessageList";
+import { useMutation } from "@apollo/react-hooks";
+import useForm from "../../../lib/hooks/useForm";
 
 const CREATE_MESSAGE_MUTATION = gql`
   mutation createMessage($title: String!, $body: String!) {
@@ -15,8 +14,11 @@ const CREATE_MESSAGE_MUTATION = gql`
 `;
 
 const CreateMessage = props => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const { values, handleChange } = useForm({
+    title: "",
+    body: "",
+  });
+  const { title, body } = values;
   const [createMessage, { error, loading }] = useMutation(
     CREATE_MESSAGE_MUTATION
   );
@@ -41,9 +43,10 @@ const CreateMessage = props => {
         <input
           data-testid="createmessage-title"
           id="title"
+          name="title"
           type="text"
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={handleChange}
         />
 
         <label htmlFor="body">
@@ -52,9 +55,10 @@ const CreateMessage = props => {
         <textarea
           data-testid="createmessage-body"
           id="body"
+          name="body"
           type="text"
           value={body}
-          onChange={e => setBody(e.target.value)}
+          onChange={handleChange}
           rows="7"
         />
 
@@ -67,11 +71,6 @@ const CreateMessage = props => {
     </>
   );
 };
-
-// const bodyTemplate =
-//   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-// const titleTemplate = "Lorem ipsum";
 
 export default CreateMessage;
 export { CREATE_MESSAGE_MUTATION };
