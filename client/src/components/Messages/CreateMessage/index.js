@@ -39,7 +39,7 @@ const CreateMessage = props => {
           <h5>Message</h5>
         </label>
         <input
-          data-testid="message-title"
+          data-testid="createmessage-title"
           id="title"
           type="text"
           value={title}
@@ -50,7 +50,7 @@ const CreateMessage = props => {
           <h5>Body</h5>
         </label>
         <textarea
-          data-testid="message-body"
+          data-testid="createmessage-body"
           id="body"
           type="text"
           value={body}
@@ -58,7 +58,11 @@ const CreateMessage = props => {
           rows="7"
         />
 
-        <input type="submit" value="Publish" data-testid="message-submit" />
+        <input
+          type="submit"
+          value="Publish"
+          data-testid="createmessage-submit"
+        />
       </form>
     </>
   );

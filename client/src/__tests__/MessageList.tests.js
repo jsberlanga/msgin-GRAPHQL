@@ -6,19 +6,8 @@ import MessageList from "../components/Messages/MessageList/MessageList";
 import { BrowserRouter } from "react-router-dom";
 import { GET_MESSAGES_MOCK } from "../__mocks__";
 
-const originalError = console.error;
-beforeAll(() => {
-  console.error = (...args) => {
-    if (/Warning.*not wrapped in act/.test(args[0])) {
-      return;
-    }
-    originalError.call(console, ...args);
-  };
-});
-
-afterAll(() => {
-  console.error = originalError;
-});
+import fixActWarning from "../lib/integration/act";
+fixActWarning();
 
 test("should render messagelist", async () => {
   const { getByTestId, getAllByTestId } = render(

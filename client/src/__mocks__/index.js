@@ -1,6 +1,7 @@
 import { GET_MESSAGES_QUERY } from "../components/Messages/MessageList/MessageList";
 import { ME_QUERY } from "../context/UserContext";
 import { CREATE_MESSAGE_MUTATION } from "../components/Messages/CreateMessage";
+import { CREATE_COMMENT_MUTATION } from "../components/Comments/CreateComment";
 
 export const GET_MESSAGES_MOCK = [
   {
@@ -104,6 +105,23 @@ export const CREATE_MESSAGE_MOCK = [
           },
         ],
       },
+    },
+  },
+];
+
+const createComment = { id: 1, text: "testcomment" };
+
+export const CREATE_COMMENT_MOCK = [
+  {
+    request: {
+      query: CREATE_COMMENT_MUTATION,
+      variables: {
+        text: "testcomment",
+        messageId: "123abc",
+      },
+    },
+    result: {
+      data: { createComment },
     },
   },
 ];

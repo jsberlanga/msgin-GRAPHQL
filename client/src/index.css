@@ -65,6 +65,7 @@ form {
   display: grid;
   width: 30rem;
   box-shadow: 6px 6px 1px pink;
+  word-wrap: break-word;
 }
 
 input,
@@ -74,6 +75,8 @@ textarea {
   background: #f1f1f1;
   font-size: 1rem;
   color: #424242;
+  width: 100%;
+  word-wrap: break-word;
 }
 
 label {

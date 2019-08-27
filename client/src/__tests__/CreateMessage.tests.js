@@ -7,19 +7,8 @@ import { MemoryRouter, Route } from "react-router";
 import { MockedProvider } from "@apollo/react-testing";
 import { CREATE_MESSAGE_MOCK, GET_MESSAGES_MOCK } from "../__mocks__";
 
-const originalError = console.error;
-beforeAll(() => {
-  console.error = (...args) => {
-    if (/Warning.*not wrapped in act/.test(args[0])) {
-      return;
-    }
-    originalError.call(console, ...args);
-  };
-});
-
-afterAll(() => {
-  console.error = originalError;
-});
+import fixActWarning from "../lib/integration/act";
+fixActWarning();
 
 // Awesome help from:
 // 1. https://spectrum.chat/testing-library/help/hi-guys-what-is-right-way-to-test-component-like-this~1ae07934-ad6c-4f97-8513-f250d39b1f17
@@ -34,13 +23,13 @@ test("createmessage should create new message", async () => {
       </MemoryRouter>
     </MockedProvider>
   );
-  fireEvent.change(getByTestId("message-title"), {
+  fireEvent.change(getByTestId("createmessage-title"), {
     target: { value: "testtitle" },
   });
-  fireEvent.change(getByTestId("message-body"), {
+  fireEvent.change(getByTestId("createmessage-body"), {
     target: { value: "testbody" },
   });
-  fireEvent.click(getByTestId("message-submit"));
+  fireEvent.click(getByTestId("createmessage-submit"));
   expect(getByTestId("loading")).toBeTruthy();
 
   await waitForElement(() => getByTestId("messagelist"));

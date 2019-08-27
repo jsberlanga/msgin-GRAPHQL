@@ -6,19 +6,8 @@ import { MockedProvider, wait } from "@apollo/react-testing";
 import { BrowserRouter } from "react-router-dom";
 import { NOT_ME_MOCK, ME_MOCK } from "../__mocks__";
 
-const originalError = console.error;
-beforeAll(() => {
-  console.error = (...args) => {
-    if (/Warning.*not wrapped in act/.test(args[0])) {
-      return;
-    }
-    originalError.call(console, ...args);
-  };
-});
-
-afterAll(() => {
-  console.error = originalError;
-});
+import fixActWarning from "../lib/integration/act";
+fixActWarning();
 
 describe("<App />", () => {
   test("authenticated app should render", async () => {
