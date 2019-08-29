@@ -1,0 +1,10 @@
+node_modules
+build
+dist
+assets
+.DS_Store
+.env
+.gitignore
+datamodel.prisma
+prisma
+generated
