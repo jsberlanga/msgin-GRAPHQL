@@ -24,6 +24,7 @@ const Signup = props => {
     password: "",
   });
   const { name, email, password } = values;
+  console.log({ name, email, password });
 
   const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION);
 
@@ -47,15 +48,20 @@ const Signup = props => {
         <label htmlFor="name">
           <h5>Name</h5>
         </label>
-        <input id="name" type="text" onChange={handleChange} />
+        <input id="name" type="text" name="name" onChange={handleChange} />
         <label htmlFor="email">
           <h5>Email</h5>
         </label>
-        <input id="email" type="email" onChange={handleChange} />
+        <input id="email" type="email" name="email" onChange={handleChange} />
         <label htmlFor="password">
           <h5>Password</h5>
         </label>
-        <input id="password" type="password" onChange={handleChange} />
+        <input
+          id="password"
+          type="password"
+          name="password"
+          onChange={handleChange}
+        />
         <input type="submit" value="Register" />
       </form>
     </>
