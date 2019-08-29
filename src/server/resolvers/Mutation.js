@@ -78,13 +78,16 @@ export default {
         },
       });
 
-      client.sendEmail({
+      const url = `${process.env.FRONTEND_URL}/reset/resetToken=${resetToken}`;
+
+      client.sendEmailWithTemplate({
         From: "hi@juliosoto.dev",
         To: email,
-        Subject: "Your Password Reset Token from newsby",
-        HtmlBody: `<h2>Hello ${user.name}!</h2>
-        <p>Please use the following link to reset your password:</p>
-        <a href="${process.env.FRONTEND_URL}/reset/resetToken=${resetToken}">Click here!</a>`,
+        TemplateAlias: "password-reset",
+        TemplateModel: {
+          name: user.name,
+          action_url: url,
+        },
       });
 
       return {
