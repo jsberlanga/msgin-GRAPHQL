@@ -24,7 +24,6 @@ const Signup = props => {
     password: "",
   });
   const { name, email, password } = values;
-  console.log({ name, email, password });
 
   const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION);
 

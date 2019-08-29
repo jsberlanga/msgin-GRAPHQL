@@ -1,44 +1,70 @@
 import React from "react";
 import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import useForm from "../../lib/hooks/useForm";
+import Error from "../globals/Error";
+import Success from "../globals/Success";
 
-const SEND_EMAIL_MUTATION = gql`
-  mutation SEND_EMAIL_MUTATION($email: String) {
-    sendEmail(email: $email) {
+const PASSWORD_RESET_MUTATION = gql`
+  mutation passwordReset(
+    $resetToken: String!
+    $resetTokenExpiry: String!
+    $password: String!
+  ) {
+    passwordReset(
+      resetToken: $resetToken
+      resetTokenExpiry: $resetTokenExpiry
+      password: $password
+    ) {
       message
     }
   }
 `;
 
-const SendEmail = () => {
-  const [email, setEmail] = React.useState("");
-  const [sendEmail, { data }] = useMutation(SEND_EMAIL_MUTATION);
+const PasswordResetPage = props => {
+  const { values, handleChange, setValues } = useForm({ password: "" });
+  const { password } = values;
+  const resetToken = props.match.params.id;
+  const [passwordReset, { loading, error, data }] = useMutation(
+    PASSWORD_RESET_MUTATION,
+    {
+      variables: {
+        password,
+        resetToken,
+        resetTokenExpiry: String(Date.now()),
+      },
+    }
+  );
   return (
     <div>
+      {loading && <div data-testid="loading" className="lds-dual-ring" />}
       <form
-        onSubmit={e => {
+        onSubmit={async e => {
           e.preventDefault();
-          sendEmail({ variables: { email } });
-          setEmail("");
+          await passwordReset();
+          setValues({ password: "" });
         }}
       >
-        <h1>Password Reset</h1>
-        <h5>Forgot your password?</h5>
-        <label htmlFor="reset-email">
-          <h5>Email</h5>
+        <h1>Reset your password:</h1>
+        <label htmlFor="signin-password">
+          <h5>Enter a new password</h5>
         </label>
         <input
-          id="reset-email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          id="signin-password"
+          type="password"
+          value={password}
+          name="password"
+          onChange={handleChange}
         />
-        <input type="submit" value="Send" />
+        <input type="submit" value="Reset" />
       </form>
-      {data ? <h3>{data.sendEmail.message}</h3> : null}
+      {error &&
+        error.graphQLErrors.map(err => (
+          <Error key={err.message}>{err.message}</Error>
+        ))}
+      {data ? <Success>{data.passwordReset.message}</Success> : null}
     </div>
   );
 };
 
-export default SendEmail;
+export default PasswordResetPage;

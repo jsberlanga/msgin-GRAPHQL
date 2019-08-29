@@ -25,7 +25,7 @@
     "subscriptions-transport-ws": "^0.9.16"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:all": "react-scripts test --env=jsdom --watchAll",
@@ -33,7 +33,7 @@
     "lint:dev": "eslint --fix 'src/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
     "server": "cd src/server && npm run dev",
-    "all": "npm-run-all --parallel start server "
+    "start": "npm-run-all --parallel client server "
   },
   "eslintConfig": {
     "extends": "react-app"

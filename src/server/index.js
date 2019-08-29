@@ -9,14 +9,11 @@ import { prisma } from "./generated/prisma-client";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
 
-import sgMail from "@sendgrid/mail";
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 const app = express();
 
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
-  credentials: true
+  credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -36,8 +33,8 @@ const server = new ApolloServer({
   playground: true,
   context: req => ({
     ...req,
-    prisma
-  })
+    prisma,
+  }),
 });
 server.applyMiddleware({ app, path: "/__graphql", cors: false });
 // server.subscriptionsPath = "/__graphql";

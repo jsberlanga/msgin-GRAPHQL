@@ -12,7 +12,12 @@ export default gql`
     signout: SuccessMessage!
     deleteUser(id: ID!): SuccessMessage!
     deleteAllUsers: SuccessMessage!
-    sendEmail(email: String): SuccessMessage!
+    requestPasswordReset(email: String): SuccessMessage!
+    passwordReset(
+      resetToken: String!
+      resetTokenExpiry: String!
+      password: String!
+    ): SuccessMessage!
   }
   type User {
     id: ID!

@@ -7,6 +7,7 @@ import Footer from "../globals/Footer";
 import Home from "../Home";
 import Signup from "../Auth/Signup";
 import Signin from "../Auth/Signin";
+import PasswordReset from "../Auth/PasswordReset";
 import NotFound from "../NotFound";
 
 const UnauthenticatedApp = ({ user }) => {
@@ -18,6 +19,7 @@ const UnauthenticatedApp = ({ user }) => {
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={Signin} />
+          <Route path="/reset/resetToken=:id" component={PasswordReset} />
           <Route path="/" component={NotFound} />
         </Switch>
       </div>
