@@ -32,7 +32,7 @@
     "lint": "eslint './src/**/*.{js,jsx}'",
     "lint:dev": "eslint --fix 'src/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
-    "server": "cd .. && cd server && npm run dev",
+    "server": "cd src/server && npm run dev",
     "all": "npm-run-all --parallel start server "
   },
   "eslintConfig": {
