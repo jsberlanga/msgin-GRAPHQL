@@ -9,6 +9,9 @@ import { prisma } from "./generated/prisma-client";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
 
+import sgMail from "@sendgrid/mail";
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 const app = express();
 
 const corsOptions = {

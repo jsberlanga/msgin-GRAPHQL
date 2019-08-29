@@ -1,4 +1,6 @@
 import Helpers from "../lib/utils/helpers";
+import sgMail from "@sendgrid/mail";
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default {
   Mutation: {
@@ -49,6 +51,20 @@ export default {
       await context.prisma.deleteUser({ id });
       return {
         message: `The user with id: ${id} has been successfully deleted.`
+      };
+    },
+    sendEmail: (parent, { email }, context) => {
+      const msg = {
+        to: email,
+        from: "jsberlanga@gmail.com",
+        subject: "Password reset for newsby website",
+        text: "Please follow the link below to reset your password.",
+        html:
+          "<strong>write it down so you don't forget this time... just kidding!</strong>"
+      };
+      sgMail.send(msg);
+      return {
+        message: "Email sent. Please check your mailbox."
       };
     },
     // MESSAGE MUTATIONS

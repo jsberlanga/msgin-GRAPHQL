@@ -2,8 +2,10 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import useForm from "../../lib/hooks/useForm";
+import Error from "../globals/Error";
 
 import { ME_QUERY } from "../../context/UserContext";
+import PasswordReset from "./PasswordReset";
 
 const SIGNIN_MUTATION = gql`
   mutation signin($email: String!, $password: String!) {
@@ -27,10 +29,8 @@ const Signin = props => {
   const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION);
   const { refetch } = useQuery(ME_QUERY);
   return (
-    <>
+    <div>
       {loading && <div data-testid="loading" className="lds-dual-ring" />}
-      {error &&
-        error.graphQLErrors.map(err => <p key={err.message}>{err.message}</p>)}
       <form
         onSubmit={async e => {
           e.preventDefault();
@@ -63,8 +63,21 @@ const Signin = props => {
         />
         <input type="submit" value="Login" />
       </form>
-    </>
+      {error &&
+        error.graphQLErrors.map(err => (
+          <Error key={err.message}>{err.message}</Error>
+        ))}
+    </div>
   );
 };
 
-export default Signin;
+const SigninPage = props => {
+  return (
+    <div className="signin">
+      <Signin {...props} />
+      <PasswordReset {...props} />
+    </div>
+  );
+};
+
+export default SigninPage;

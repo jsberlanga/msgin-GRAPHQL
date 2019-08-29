@@ -164,6 +164,12 @@ li {
   width: 20rem;
 }
 
+/* SIGNIN */
+.signin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 /* MESSAGES */
 
 .messagelist__container {
