@@ -1,12 +1,18 @@
 import Helpers from "../lib/utils/helpers";
-import sgMail from "@sendgrid/mail";
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+import { randomBytes } from "crypto";
+
+const postmark = require("postmark");
+const client = new postmark.ServerClient(
+  "dd2d13aa-605a-4407-80ea-67ffd9c19e9c"
+);
 
 export default {
   Mutation: {
     // USER MUTATIONS
-    signup: async (parent, args, context, info) => {
-      const isRegistered = await context.prisma.user({ email: args.email });
+    signup: async (parent, args, context) => {
+      const isRegistered = await context.prisma.user({
+        email: args.email,
+      });
       if (isRegistered) {
         throw Error("User already exists in the database");
       }
@@ -18,7 +24,7 @@ export default {
 
       return {
         token,
-        user
+        user,
       };
     },
     signin: async (parent, { email, password }, context) => {
@@ -38,33 +44,83 @@ export default {
 
       return {
         token,
-        user
+        user,
       };
     },
     signout: (parent, args, context) => {
       context.res.clearCookie("token");
       return {
-        message: "Bye"
+        message: "Bye",
       };
     },
     deleteUser: async (parent, { id }, context) => {
       await context.prisma.deleteUser({ id });
       return {
-        message: `The user with id: ${id} has been successfully deleted.`
+        message: `The user with id: ${id} has been successfully deleted.`,
       };
     },
-    sendEmail: (parent, { email }, context) => {
-      const msg = {
-        to: email,
-        from: "jsberlanga@gmail.com",
-        subject: "Password reset for newsby website",
-        text: "Please follow the link below to reset your password.",
-        html:
-          "<strong>write it down so you don't forget this time... just kidding!</strong>"
-      };
-      sgMail.send(msg);
+    requestPasswordReset: async (parent, { email }, context) => {
+      const user = await context.prisma.user({ email });
+      if (!user) {
+        throw new Error("This email address does not exist.");
+      }
+
+      const resetToken = randomBytes(20).toString("hex");
+      const resetTokenExpiry = String(Date.now() + 3600000);
+
+      const updatedUser = await context.prisma.updateUser({
+        where: {
+          email,
+        },
+        data: {
+          resetToken,
+          resetTokenExpiry,
+        },
+      });
+
+      client.sendEmail({
+        From: "hi@juliosoto.dev",
+        To: email,
+        Subject: "Your Password Reset Token from newsby",
+        HtmlBody: `<h2>Hello ${user.name}!</h2>
+        <p>Please use the following link to reset your password:</p>
+        <a href="${process.env.FRONTEND_URL}/reset/resetToken=${resetToken}">Click here!</a>`,
+      });
+
       return {
-        message: "Email sent. Please check your mailbox."
+        message: "Email sent. Please check your mailbox.",
+      };
+    },
+    passwordReset: async (
+      parent,
+      { password, resetToken, resetTokenExpiry },
+      context
+    ) => {
+      const user = await context.prisma.user({ resetToken });
+      if (!user) {
+        throw new Error("User was not found!.");
+      }
+
+      const compareExpiration =
+        parseFloat(user.resetTokenExpiry) - parseFloat(resetTokenExpiry);
+
+      if (compareExpiration < 0) {
+        throw new Error("Your token has expired. Please request a new token.");
+      }
+
+      const hassedPassword = await Helpers.hassPassword(password);
+
+      await context.prisma.updateUser({
+        where: { resetToken },
+        data: {
+          password: hassedPassword,
+          resetToken: "",
+          resetTokenExpiry: "",
+        },
+      });
+
+      return {
+        message: `Your Password has been reset. Please login now.`,
       };
     },
     // MESSAGE MUTATIONS
@@ -83,9 +139,9 @@ export default {
         body,
         author: {
           connect: {
-            email
-          }
-        }
+            email,
+          },
+        },
       });
     },
 
@@ -97,14 +153,14 @@ export default {
         text,
         postedBy: {
           connect: {
-            id: userId
-          }
+            id: userId,
+          },
         },
         message: {
           connect: {
-            id: messageId
-          }
-        }
+            id: messageId,
+          },
+        },
       });
 
       return comment;
@@ -114,14 +170,14 @@ export default {
     deleteAllUsers: async (parent, args, context) => {
       await context.prisma.deleteManyUsers();
       return {
-        message: `All the users have been successfully deleted.`
+        message: `All the users have been successfully deleted.`,
       };
     },
     deleteAllMessages: async (parent, args, context) => {
       await context.prisma.deleteManyMessages();
       return {
-        message: `All the messages have been successfully deleted.`
+        message: `All the messages have been successfully deleted.`,
       };
-    }
-  }
+    },
+  },
 };

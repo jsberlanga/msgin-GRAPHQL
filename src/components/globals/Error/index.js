@@ -4,11 +4,17 @@ const styles = {
   color: "red",
   backgroundColor: "#fff",
   padding: "1rem",
-  // fontSize: "1.4rem",
 };
 
 const Error = props => {
-  return <h2 style={styles}>{props.children}</h2>;
+  const replaceContent = err => {
+    if (err.includes("GraphQL error")) {
+      return err.replace("GraphQL error: ", "");
+    } else {
+      return JSON.stringify(err);
+    }
+  };
+  return <h2 style={styles}>{replaceContent(props.children)}</h2>;
 };
 
 export default Error;

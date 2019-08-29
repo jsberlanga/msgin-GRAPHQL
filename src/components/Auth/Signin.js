@@ -5,7 +5,7 @@ import useForm from "../../lib/hooks/useForm";
 import Error from "../globals/Error";
 
 import { ME_QUERY } from "../../context/UserContext";
-import PasswordReset from "./PasswordReset";
+import RequestPassword from "./RequestPassword";
 
 const SIGNIN_MUTATION = gql`
   mutation signin($email: String!, $password: String!) {
@@ -75,7 +75,7 @@ const SigninPage = props => {
   return (
     <div className="signin">
       <Signin {...props} />
-      <PasswordReset {...props} />
+      <RequestPassword {...props} />
     </div>
   );
 };

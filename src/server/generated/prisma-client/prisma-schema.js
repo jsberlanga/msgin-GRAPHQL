@@ -614,6 +614,8 @@ type User {
   name: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
@@ -630,6 +632,8 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   messages: MessageCreateManyWithoutAuthorInput
   comments: CommentCreateManyWithoutPostedByInput
 }
@@ -650,6 +654,8 @@ input UserCreateWithoutCommentsInput {
   name: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   messages: MessageCreateManyWithoutAuthorInput
 }
 
@@ -659,6 +665,8 @@ input UserCreateWithoutMessagesInput {
   name: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   comments: CommentCreateManyWithoutPostedByInput
 }
 
@@ -678,6 +686,10 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
 }
 
 type UserPreviousValues {
@@ -686,6 +698,8 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
 }
 
 type UserSubscriptionPayload {
@@ -711,6 +725,8 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   messages: MessageUpdateManyWithoutAuthorInput
   comments: CommentUpdateManyWithoutPostedByInput
 }
@@ -720,6 +736,8 @@ input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
 }
 
 input UserUpdateOneRequiredWithoutCommentsInput {
@@ -741,6 +759,8 @@ input UserUpdateWithoutCommentsDataInput {
   name: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   messages: MessageUpdateManyWithoutAuthorInput
 }
 
@@ -749,6 +769,8 @@ input UserUpdateWithoutMessagesDataInput {
   name: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   comments: CommentUpdateManyWithoutPostedByInput
 }
 
@@ -823,6 +845,34 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  resetToken: String
+  resetToken_not: String
+  resetToken_in: [String!]
+  resetToken_not_in: [String!]
+  resetToken_lt: String
+  resetToken_lte: String
+  resetToken_gt: String
+  resetToken_gte: String
+  resetToken_contains: String
+  resetToken_not_contains: String
+  resetToken_starts_with: String
+  resetToken_not_starts_with: String
+  resetToken_ends_with: String
+  resetToken_not_ends_with: String
+  resetTokenExpiry: String
+  resetTokenExpiry_not: String
+  resetTokenExpiry_in: [String!]
+  resetTokenExpiry_not_in: [String!]
+  resetTokenExpiry_lt: String
+  resetTokenExpiry_lte: String
+  resetTokenExpiry_gt: String
+  resetTokenExpiry_gte: String
+  resetTokenExpiry_contains: String
+  resetTokenExpiry_not_contains: String
+  resetTokenExpiry_starts_with: String
+  resetTokenExpiry_not_starts_with: String
+  resetTokenExpiry_ends_with: String
+  resetTokenExpiry_not_ends_with: String
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
   messages_none: MessageWhereInput
@@ -837,6 +887,7 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   id: ID
   email: String
+  resetToken: String
 }
 `
       }

@@ -209,7 +209,11 @@ export type UserOrderByInput =
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
-  | "password_DESC";
+  | "password_DESC"
+  | "resetToken_ASC"
+  | "resetToken_DESC"
+  | "resetTokenExpiry_ASC"
+  | "resetTokenExpiry_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -239,6 +243,8 @@ export interface UserCreateWithoutCommentsInput {
   name: String;
   email: String;
   password: String;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
   messages?: Maybe<MessageCreateManyWithoutAuthorInput>;
 }
 
@@ -328,6 +334,8 @@ export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
 }
 
 export interface CommentCreateWithoutMessageInput {
@@ -342,6 +350,8 @@ export interface UserCreateInput {
   name: String;
   email: String;
   password: String;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
   messages?: Maybe<MessageCreateManyWithoutAuthorInput>;
   comments?: Maybe<CommentCreateManyWithoutPostedByInput>;
 }
@@ -402,6 +412,8 @@ export interface UserUpdateWithoutMessagesDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
   comments?: Maybe<CommentUpdateManyWithoutPostedByInput>;
 }
 
@@ -633,6 +645,34 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetToken_not?: Maybe<String>;
+  resetToken_in?: Maybe<String[] | String>;
+  resetToken_not_in?: Maybe<String[] | String>;
+  resetToken_lt?: Maybe<String>;
+  resetToken_lte?: Maybe<String>;
+  resetToken_gt?: Maybe<String>;
+  resetToken_gte?: Maybe<String>;
+  resetToken_contains?: Maybe<String>;
+  resetToken_not_contains?: Maybe<String>;
+  resetToken_starts_with?: Maybe<String>;
+  resetToken_not_starts_with?: Maybe<String>;
+  resetToken_ends_with?: Maybe<String>;
+  resetToken_not_ends_with?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
+  resetTokenExpiry_not?: Maybe<String>;
+  resetTokenExpiry_in?: Maybe<String[] | String>;
+  resetTokenExpiry_not_in?: Maybe<String[] | String>;
+  resetTokenExpiry_lt?: Maybe<String>;
+  resetTokenExpiry_lte?: Maybe<String>;
+  resetTokenExpiry_gt?: Maybe<String>;
+  resetTokenExpiry_gte?: Maybe<String>;
+  resetTokenExpiry_contains?: Maybe<String>;
+  resetTokenExpiry_not_contains?: Maybe<String>;
+  resetTokenExpiry_starts_with?: Maybe<String>;
+  resetTokenExpiry_not_starts_with?: Maybe<String>;
+  resetTokenExpiry_ends_with?: Maybe<String>;
+  resetTokenExpiry_not_ends_with?: Maybe<String>;
   messages_every?: Maybe<MessageWhereInput>;
   messages_some?: Maybe<MessageWhereInput>;
   messages_none?: Maybe<MessageWhereInput>;
@@ -750,6 +790,8 @@ export interface UserCreateWithoutMessagesInput {
   name: String;
   email: String;
   password: String;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
   comments?: Maybe<CommentCreateManyWithoutPostedByInput>;
 }
 
@@ -758,6 +800,8 @@ export interface UserUpdateWithoutCommentsDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutAuthorInput>;
 }
 
@@ -841,6 +885,7 @@ export interface MessageUpdateWithWhereUniqueWithoutAuthorInput {
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   email?: Maybe<String>;
+  resetToken?: Maybe<String>;
 }>;
 
 export interface UserUpdateInput {
@@ -848,6 +893,8 @@ export interface UserUpdateInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutAuthorInput>;
   comments?: Maybe<CommentUpdateManyWithoutPostedByInput>;
 }
@@ -881,6 +928,8 @@ export interface UserPreviousValues {
   name: String;
   email: String;
   password: String;
+  resetToken?: String;
+  resetTokenExpiry?: String;
 }
 
 export interface UserPreviousValuesPromise
@@ -891,6 +940,8 @@ export interface UserPreviousValuesPromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  resetToken: () => Promise<String>;
+  resetTokenExpiry: () => Promise<String>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -901,6 +952,8 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  resetToken: () => Promise<AsyncIterator<String>>;
+  resetTokenExpiry: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateComment {
@@ -967,6 +1020,8 @@ export interface User {
   name: String;
   email: String;
   password: String;
+  resetToken?: String;
+  resetTokenExpiry?: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -975,6 +1030,8 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  resetToken: () => Promise<String>;
+  resetTokenExpiry: () => Promise<String>;
   messages: <T = FragmentableArray<Message>>(args?: {
     where?: MessageWhereInput;
     orderBy?: MessageOrderByInput;
@@ -1003,6 +1060,8 @@ export interface UserSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  resetToken: () => Promise<AsyncIterator<String>>;
+  resetTokenExpiry: () => Promise<AsyncIterator<String>>;
   messages: <T = Promise<AsyncIterator<MessageSubscription>>>(args?: {
     where?: MessageWhereInput;
     orderBy?: MessageOrderByInput;
@@ -1031,6 +1090,8 @@ export interface UserNullablePromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  resetToken: () => Promise<String>;
+  resetTokenExpiry: () => Promise<String>;
   messages: <T = FragmentableArray<Message>>(args?: {
     where?: MessageWhereInput;
     orderBy?: MessageOrderByInput;
