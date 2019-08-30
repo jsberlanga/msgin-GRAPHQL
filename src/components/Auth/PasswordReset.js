@@ -1,6 +1,6 @@
 import React from "react";
 import { gql } from "apollo-boost";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import useForm from "../../lib/hooks/useForm";
 import Error from "../globals/Error";
 import Success from "../globals/Success";

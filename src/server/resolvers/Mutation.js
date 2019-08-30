@@ -22,6 +22,27 @@ export default {
 
       Helpers.setCookie(context, token);
 
+      const createMessageUrl = `${process.env.FRONTEND_URL}/add`;
+      const loginUrl = `${process.env.FRONTEND_URL}/signin`;
+      const homeUrl = `${process.env.FRONTEND_URL}`;
+
+      client.sendEmailWithTemplate({
+        From: "hi@juliosoto.dev",
+        To: args.email,
+        TemplateAlias: "welcome",
+        TemplateModel: {
+          name: args.name,
+          product_name: "newsby",
+          action_url: createMessageUrl,
+          login_url: loginUrl,
+          username: args.email,
+          support_email: "hi@juliosoto.dev",
+          sender_name: "Julio",
+          help_url: homeUrl,
+          company_name: "newsby",
+          company_address: "Dobrego Pasterza 120, Krakow, Polska",
+        },
+      });
       return {
         token,
         user,

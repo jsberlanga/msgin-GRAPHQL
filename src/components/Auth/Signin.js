@@ -27,7 +27,17 @@ const Signin = props => {
   const { email, password } = values;
 
   const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION);
-  const { refetch } = useQuery(ME_QUERY);
+  const { data, refetch } = useQuery(ME_QUERY);
+
+  React.useEffect(() => {
+    props.setIsLoading(true);
+    if (data && data.me) {
+      props.setIsLoggedIn(true);
+      props.setIsLoading(false);
+    }
+    props.setIsLoading(false);
+  }, [props, data]);
+
   return (
     <div>
       {loading && <div data-testid="loading" className="lds-dual-ring" />}
@@ -72,9 +82,18 @@ const Signin = props => {
 };
 
 const SigninPage = props => {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  if (isLoading) return <div data-testid="loading" className="lds-dual-ring" />;
+  if (isLoggedIn)
+    return <h1>You are already signed in. There is nothing here.</h1>;
   return (
     <div className="signin">
-      <Signin {...props} />
+      <Signin
+        {...props}
+        setIsLoggedIn={setIsLoggedIn}
+        setIsLoading={setIsLoading}
+      />
       <RequestPassword {...props} />
     </div>
   );

@@ -62,15 +62,16 @@ const CommentsByMessage = ({ messageId }) => {
   );
 };
 
-const CommentsPage = props => {
+const CommentsPage = ({ loading, subscribeToNewComments, data }) => {
   React.useEffect(() => {
-    props.subscribeToNewComments();
-  }, []);
-  if (props.loading)
-    return <div data-testid="loading" className="lds-dual-ring" />;
+    if (loading) {
+      subscribeToNewComments();
+    }
+  }, [loading, subscribeToNewComments]);
+  if (loading) return <div data-testid="loading" className="lds-dual-ring" />;
   return (
     <ul>
-      {props.data.getCommentsByMessage.map(comment => (
+      {data.getCommentsByMessage.map(comment => (
         <li id={comment.id} className="comment" key={comment.id}>
           <p className="comment__text">{comment.text}</p>
           <p className="comment__author">Posted by {comment.postedBy.name}</p>
